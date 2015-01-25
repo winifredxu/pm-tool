@@ -1,0 +1,42 @@
+.panel.panel-primary
+  .panel-heading
+    .panel-title
+      h1 
+      	= @project.title 
+  .panel-body
+    strong Description:
+    | = @project.description
+    br
+    strong Due Date:
+    | = @project.due_date
+    | - if @task.errors.any?
+	ul
+  | - @task.errors.full_messages.each do |msg|
+  li = msg
+  |
+  | 
+.well
+  h3 Create Task
+  | = form_for [@project, @task] do |f|
+  .form-inline
+    | = f.text_area :title, class: "form-control", placeholder: "Task Title", rows: 1 
+    | = f.text_area :due_date, class: "form-control", placeholder: "Due Date", rows: 1 
+    | = f.submit class: "btn btn-success"
+    |
+	h3 Current Tasks
+	hr
+	.push-right
+  | - @project.tasks.each do |task|
+  strong Title:
+  | = task.title
+  br
+  | = succeed do
+    strong Due Date:
+  | task.due_date %
+  br/
+  br/
+  | = link_to "Delete", project_task_path(@project, task), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger"
+  | = link_to "New Discussion", project_task_path(@project, discussion), class: "btn btn-sm btn-danger"
+  | Discussions:
+  hr
+  |

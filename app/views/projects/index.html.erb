@@ -1,0 +1,30 @@
+<div class="container" max-width="90%">
+		<h1>Welcome to your projects!</h1>
+	
+	<div id="alerts">
+		<% if flash[:success] %>
+		<div class="alert alert-success" role="alert"><%= flash[:success] %></div>
+		<% end %>
+	</div>
+
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Title</th>
+				<th>Description</th>
+				<th>Due Date</th>
+			</tr>
+		</thead>
+	</tr>
+	<% @projects.each do |project| %>
+	<tr>
+		<td><%= project.title %></td>
+		<td><%= project.description %></td>
+		<td><%= project.due_date %></td>
+		<td>
+			<%= link_to "Details", project_path(project), class: "btn btn-default" %><td><%= link_to "Delete", project_path(project), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %></td>
+			<% end %>
+		</tr>
+		
+	</table>
+</div>

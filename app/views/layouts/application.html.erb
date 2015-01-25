@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+     <head>
+          <title>CodeCore Quiz #1</title>
+          <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+          <%= csrf_meta_tags %>
+          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+          <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+          <link rel="stylesheet" href="assets/stylesheets/application.css">
+          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+     </head>
+     <body>
+          <!-- BEGIN CONTENT -->
+          <div class="container" max-width="90%">
+               <ul>
+               <li><a href="/projects/">Show Projects</a></li>
+               |
+               <li><a href="/projects/new">New Project</a></li>
+               </ul>
+               <hr>
+               <%= yield %>
+          </div>
+     </body>
+</html>
