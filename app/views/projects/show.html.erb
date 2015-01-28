@@ -1,63 +1,98 @@
 <div class="panel panel-primary">
-<div class="panel-heading">
-<div class="panel-title"><h1><%= @project.title %></h1></div>
+	<div class="panel-heading">
+		<div class="panel-title"><h1><%= @project.title %></h1></div>
+	</div>
+
+	<div class="panel-body">
+		<strong>Description:</strong> <%= @project.description %><br>
+		<strong>Due Date:</strong> <%= @project.due_date %> 
+	</div>
 </div>
-<div class="panel-body">
-<strong>Description:</strong> <%= @project.description %><br>
-<strong>Due Date:</strong> <%= @project.due_date %> 
-</div>
-</div>
-	<% if @task.errors.any? %>
-		<ul>
-			<% @task.errors.full_messages.each do |msg| %>
-				<li><%= msg %></li>
-			<% end %>
+
+<% if @task.errors.any? %>
+	<ul>
+		<% @task.errors.full_messages.each do |msg| %>
+			<li><%= msg %></li>
+		<% end %>
 		</ul>
-	<% end %>	
-<div class="well">
-<h3>Create Task</h3>
-<%# form_for @task, url: project_tasks_path(@project) do |f| %>
-<%= form_for [@project, @task] do |f| %>
-  <div class="form-inline">
-    <%= f.text_area :title, class: "form-control", placeholder: "Task Title", rows: 1 %>
-    <%= f.text_area :due_date, class: "form-control", placeholder: "Due Date", rows: 1 %>
-    <%= f.submit class: "btn btn-success" %>
-  </div>
-  
 <% end %>
+
+<div>
+
+	<h2>Tasks</h2>
+		<%# form_for @task, url: project_tasks_path(@project) do |f| %>
+		<%= form_for [@project, @task] do |f| %>
+  		<div class="form-inline">
+    		<%= f.text_area :title, class: "form-control", placeholder: "Task Title", rows: 1 %>
+    		<%= f.text_area :due_date, class: "form-control", placeholder: "Due Date", rows: 1 %>
+    		<%= f.submit class: "btn btn-success" %><br>
+  		</div>
+  	<% end %>
 </div>
+<br>
 
- <h3>Current Tasks</h3>
- <hr>
- <div class="push-right">
+<table class="table table-striped">
+	<thead>
+ 	<tr>
+ 		<td>Title</td>
+ 		<td>Due Date</td>
+ 		<td>Status</td>
+ 		<td>Delete</td>
+ 	</tr>
+  </thead>
 	<% @project.tasks.each do |task| %>
-	  <strong>Title:</strong> <%= task.title %><br>
-	  <strong>Due Date: </strong><%= task.due_date %>
-<br><br>
-	 <%= link_to "Delete", project_task_path(@project, task), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger" %>
-	 <%= link_to "New Discussion", project_task_path(@project, task), class: "btn btn-sm btn-danger" %> 
-	 <hr>
-	 	 </div>
+		<tr>
+		  <td><%= task.title %></td>
+		  <td><%= task.due_date %></td>
+		  <td>Status</td>
+		 	<td><%= link_to "Delete", project_task_path(@project, task), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger" %></td>
+		</tr>
+	<% end %>
+</table>
+ 
+<h2>Discussions</h2>
+	<%= form_for [@project, @discussion] do |f| %>
+  	<div class="form-inline">
+    	<%= f.text_area :title, class: "form-control", placeholder: "Title", rows: 1 %>
+      <%= f.text_area :description, class: "form-control", placeholder: "Description", rows: 1 %>
+    	<%= f.text_area :due_date, class: "form-control", placeholder: "Due Date", rows: 1 %>
+    	<%= f.submit class: "btn btn-success" %>
+	<% end %> 	
+  	</div>
 
-<%= form_for [task, (@discussion || Discussion.new)] do |f| %>
-  <div class="form-inline">
-    <%= f.text_area :title, class: "form-control", placeholder: "Title", rows: 1 %>
-        <%= f.text_area :description, class: "form-control", placeholder: "Description", rows: 1 %>
-    <%= f.text_area :due_date, class: "form-control", placeholder: "Due Date", rows: 1 %>
-    <%= f.submit class: "btn btn-success" %>
-  </div>
+<table class="table table-striped">
+ <thead>
+ 	<tr>
+ 		<td>Title</td>
+ 		<td>Description</td>
+ 		<td>Due Date</td>
+ 		<td>Delete</td>
+ 	</tr>
+ </thead>
+ <% @project.discussions.each do |discussion| %>
+  <tr>
+	  <td><%= discussion.title %></td>
+	  <td><%= discussion.description %></td>
+	  <td><%= discussion.due_date %></td>
+	  <td><%= link_to "Delete", project_discussion_path(@project, discussion), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger" %></td>
+	</tr>
+		<tr>
+   <td>Comments: 
+   	<% discussion.comments.each do |comment| %>
+  	<%= comment.body %>
+  	<% end %>
+  	</td>
+  </tr>
+	<tr colspan="4">
+		<td><%= form_for [discussion, @comment || Comment.new ] do |f| %>
+  		<div class="form-inline">
+    		<%= f.text_area :body, class: "form-control", placeholder: "Comment", rows: 2 %>
+    	  <%= f.submit class: "btn btn-success" %></td>
+    	</div>
+  	<% end %>
+  </tr>
+ <% end %>
+</table>
 
-  <h3>Current Discussions</h3>
- <hr>
-	<% task.discussions.each do |discussion| %>
-	  <strong>Title:</strong> <%= discussion.title %><br>
-	  <strong>Description:</strong> <%= discussion.description %><br>
-	  <strong>Due Date: </strong><%= discussion.due_date %>
-		<br><br>
-			 <%= link_to "Delete", task_discussion_path(task, discussion), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger" %>
-	 <hr>
 
-<% end %>
-<% end %>
-<% end %>
 

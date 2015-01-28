@@ -1,11 +1,10 @@
 class ProjectsController < ApplicationController
 
   before_action :find_project,
-    only: [:show, :edit, :update, :destroy, :search]
+    only: [:show, :edit, :update, :destroy]
 
   def index
     @projects = Project.all
-    @tasks = Task.all
   end
 
   def new
@@ -41,17 +40,13 @@ class ProjectsController < ApplicationController
     end
   end
 
-  def show
+  def show 
     @task = Task.new
-    @tasks = @project.tasks
-    #@discussion = Discussion.new
-    # #  @discussion = @task.discussions.new
-    #   @discussions = @task.discussions.all
+    @discussion = Discussion.new
+    @comment = Comment.new
   end
 
-
-
-
+  
 
   private
 

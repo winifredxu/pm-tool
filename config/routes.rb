@@ -1,13 +1,18 @@
 Rails.application.routes.draw do
   
- resources :projects do
-  resources :tasks
-end
+  resources :projects do
+    resources :tasks, only: [:create, :destroy, :edit]
+  end
 
-  resources :tasks, only: [] do
+  resources :projects, only: [] do
     resources :discussions, only: [:create, :destroy]
   end
- root "projects#index"
+
+  resources :discussions, only: [] do
+    resources :comments, only: [:create, :destroy]
+  end
+  
+  root "projects#index"
 
 
 

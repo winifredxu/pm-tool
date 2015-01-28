@@ -1,7 +1,7 @@
 class TasksController < ApplicationController
+  before_action :find_project
 
   def create
-    @project = Project.find params[:project_id]
     @task = @project.tasks.new task_params
     if @task.save
       redirect_to @project, notice: "Task created successfully"
@@ -11,15 +11,17 @@ class TasksController < ApplicationController
   end
 
   def destroy
-    @project = Project.find params[:project_id]
     @task = Task.find params[:id]
     @task.destroy
     redirect_to @project, notice: "Task deleted successfully"
-
   end
 
 
   private
+
+  def find_project
+    @project = Project.find params[:project_id]
+  end
 
   def task_params
     params.require(:task).permit(:title, :due_date)
