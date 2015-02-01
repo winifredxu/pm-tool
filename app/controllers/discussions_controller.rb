@@ -12,11 +12,14 @@ class DiscussionsController < ApplicationController
   end
 
   def edit
+    @discussion = Discussion.find params[:id]
   end
 
   def update
+    @discussion = Discussion.find params[:id]
+    @project = Project.find @discussion.project_id
     if @discussion.update discussion_params
-      redirect_to projects_path
+      redirect_to project_path(@discussion.project_id)
       flash[:success] = "Request was successfully edited."
     else
       render :edit

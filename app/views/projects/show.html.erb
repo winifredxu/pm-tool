@@ -74,7 +74,7 @@
 	  <td><strong><%= discussion.title %></strong></td>
 	  <td><%= discussion.description %></td>
 	  <td><%= standard_date(discussion.due_date) %></td>
-	  <td><%= link_to "Edit", edit_project_discussion_path(@project.id, discussion), class: "btn btn-default" %><td>
+	  <td><%= link_to "Edit", edit_project_discussion_path(@project, discussion), class: "btn btn-default" %><td>
 	  <td><%= link_to "Delete", project_discussion_path(@project, discussion), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger" %></td>
 	</tr>
 		<tr class="header-bg">
@@ -82,7 +82,7 @@
    	<% discussion.comments.each do |comment| %>
    	<tr class="comments_container">	
 			<td colspan="5"><%= comment.body %></td>
-  		<td><%= link_to "Delete", discussion_comment_path(discussion, comment.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger" %></td>
+  		<td><%= link_to "Delete", discussion_comment_path(discussion, comment.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-xs btn-danger" %></td>
   	</tr>
   	<% end %>
   	</td>
@@ -93,7 +93,7 @@
 		<td><%= form_for [discussion, @comment || Comment.new ] do |f| %>
   		<div class="form-inline">
     		<%= f.text_area :body, class: "form-control", placeholder: "Comment", rows: 2 %>
-    	  <%= f.submit class: "btn btn-success" %></td>
+    	  <br><%= f.submit class: "form-comment btn btn-sm btn-success" %></td>
     	</div>
   	<% end %>
   </tr>

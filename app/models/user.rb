@@ -10,4 +10,8 @@ class User < ActiveRecord::Base
   has_many :discussions, dependent: :nullify
   has_many :comments, dependent: :nullify
 
+  has_many :members, dependent: :nullify
+  has_many :projects_with_members, through: :members, source: :project
+
+
 end

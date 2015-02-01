@@ -1,6 +1,8 @@
 class Project < ActiveRecord::Base
 	has_many :discussions, dependent: :destroy
   has_many :tasks, dependent: :destroy
+  has_many :members, dependent: :nullify
+  has_many :users, through: :members
   default_scope { order("due_date ASC") }
   validates :title, presence: true
 

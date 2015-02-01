@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   
   resources :projects do
     resources :tasks, only: [:create, :destroy, :update, :edit]
+    resources :members, only: [:create, :destroy]
   end
 
   resources :projects, only: [] do

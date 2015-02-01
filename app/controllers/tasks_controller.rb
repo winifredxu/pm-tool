@@ -1,5 +1,6 @@
 class TasksController < ApplicationController
-  before_action :find_project
+  before_action :find_project,
+   only: [:create, :show, :destroy, :search, :edit]
   before_action :authenticate_user!
 
   def create
@@ -12,19 +13,22 @@ class TasksController < ApplicationController
   end
 
   def destroy
-
-    @project = Project.find @task.project_id
-    @task = Task.find params[:id]
-    @task.destroy
-    redirect_to @project, notice: "Task deleted successfully"
+    task = Task.find params[:id]
+    @project = Project.find task.project_id
+    
+    task.destroy
+    redirect_to project_path(task.project_id), notice: "Task deleted successfully"
   end
 
   def edit
+    @task = Task.find params[:id]
   end
 
   def update
+    @task = Task.find params[:id]
+    @project = Project.find @task.project_id
     if @task.update task_params
-      redirect_to project_path
+      redirect_to project_path(@task.project_id)
       flash[:success] = "Task was successfully edited."
     else
       render :edit
