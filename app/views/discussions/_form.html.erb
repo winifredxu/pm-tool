@@ -1,0 +1,25 @@
+
+
+
+
+<%= form_for [@project, @discussion] do |f| %>
+	<%= f.label :title %>
+	<br>
+	<%= f.text_field :title, class: "form-control" %>
+	<br>
+	<%= f.label :description %>
+	<br>
+	<%= f.text_field :description, class: "form-control" %>
+	<br>
+	<%= f.label :due_date %>
+	<br>
+	<%= f.text_field :due_date, class: "form-control" %>
+	<br>
+	<%= f.submit class: "btn btn-primary" %>
+	<%= button_tag "Reset", type: :reset %>
+<% end %>
+
+
+
+
+

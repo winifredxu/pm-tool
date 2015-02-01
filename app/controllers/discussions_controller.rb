@@ -1,5 +1,6 @@
 class DiscussionsController < ApplicationController
   before_action :find_project
+  before_action :authenticate_user!
 
   def create
    @discussion = @project.discussions.new discussion_params
@@ -10,6 +11,17 @@ class DiscussionsController < ApplicationController
     end
   end
 
+  def edit
+  end
+
+  def update
+    if @discussion.update discussion_params
+      redirect_to projects_path
+      flash[:success] = "Request was successfully edited."
+    else
+      render :edit
+    end
+  end
 
   def destroy
     @discussion = Discussion.find params[:id]

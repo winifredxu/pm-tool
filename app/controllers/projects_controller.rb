@@ -1,10 +1,15 @@
 class ProjectsController < ApplicationController
-
+  before_action :authenticate_user!
   before_action :find_project,
-    only: [:show, :edit, :update, :destroy]
+    only: [:show, :edit, :update, :destroy, :search]
+
 
   def index
-    @projects = Project.all
+    if params[:search]
+      @projects = Project.search(params[:search]).order('created_at DESC')
+    else
+      @projects = Project.all
+    end
   end
 
   def new
@@ -46,13 +51,18 @@ class ProjectsController < ApplicationController
     @comment = Comment.new
   end
 
+
+  def search
+   @projects = Project.search params[:search]
+  end
+
   
 
   private
 
   def project_params
     params.require(:project).permit(:title,
-                                    :description, :due_date)
+                                    :description, :due_date, :search)
   end
 
   def find_project

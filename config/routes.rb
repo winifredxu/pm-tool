@@ -1,18 +1,21 @@
 Rails.application.routes.draw do
   
+  devise_for :users
+  
   resources :projects do
-    resources :tasks, only: [:create, :destroy, :edit]
+    resources :tasks, only: [:create, :destroy, :update, :edit]
   end
 
   resources :projects, only: [] do
-    resources :discussions, only: [:create, :destroy]
+    resources :discussions, only: [:create, :destroy, :update, :edit]
   end
 
   resources :discussions, only: [] do
     resources :comments, only: [:create, :destroy]
   end
   
-  root "projects#index"
+  root to: "projects#index"
+
 
 
 

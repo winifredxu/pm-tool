@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
   before_action :find_discussion
+  before_action :authenticate_user!
 
   def create
     @project = Project.find @discussion.project_id
@@ -12,6 +13,8 @@ class CommentsController < ApplicationController
   end
 
   def destroy
+    @project = Project.find @discussion.project_id
+    @comment = Comment.find params[:id]
     @comment.destroy
     redirect_to @project, notice: "Comment deleted successfully"
   end

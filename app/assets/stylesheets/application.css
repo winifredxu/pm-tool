@@ -1,15 +1,33 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
- * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any styles
- * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
- * file per style scope.
- *
- *= require_tree .
- *= require_self
- */
+@import 'bootstrap-sprockets';
+@import 'bootstrap';
+
+ul {
+	margin-top: 15px;
+}
+
+
+li {
+ display: inline;
+}
+
+.header-bg {
+ 	background-image: -ms-linear-gradient(right, #FFFFFF 0%, #00A3EF 200%)
+ 	background-image: -moz-linear-gradient(right, #FFFFFF 0%, #00A3EF 200%)
+ 	background-image: -o-linear-gradient(right, #FFFFFF 0%, #00A3EF 200%)
+ 	background-image: -webkit-gradient(linear, right top, left top, color-stop(0, #FFFFFF), color-stop(2, #00A3EF))
+ 	background-image: -webkit-linear-gradient(right, #FFFFFF 0%, #00A3EF 200%)
+ 	background-image: linear-gradient(to left, #FFFFFF 0%, #00A3EF 200%)
+ }
+
+.search {
+	position: absolute;
+	right: 90px;
+	margin-top: -45px;
+
+}
+
+.search_btn {
+	position: absolute;
+	left: 172px;
+	margin-bottom: 30px;
+}

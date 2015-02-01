@@ -5,7 +5,7 @@
 
 	<div class="panel-body">
 		<strong>Description:</strong> <%= @project.description %><br>
-		<strong>Due Date:</strong> <%= @project.due_date %> 
+		<strong>Due Date:</strong> <%= standard_date(@project.due_date) %> 
 	</div>
 </div>
 
@@ -43,9 +43,9 @@
 	<% @project.tasks.each do |task| %>
 		<tr>
 		  <td><%= task.title %></td>
-		  <td><%= task.due_date %></td>
-		  <td>Status</td>
-		 	<td><%= link_to "Delete", project_task_path(@project, task), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger" %></td>
+		  <td><%= standard_date(task.due_date) %></td>
+
+		 	<td><%= link_to "Edit", edit_project_task_path(@project, task), class: "btn btn-default" %><td><%= link_to "Delete", project_task_path(@project, task), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger" %></td>
 		</tr>
 	<% end %>
 </table>
@@ -66,24 +66,30 @@
  		<td>Title</td>
  		<td>Description</td>
  		<td>Due Date</td>
- 		<td>Delete</td>
+ 		<td colspan="2">Actions</td>
  	</tr>
  </thead>
  <% @project.discussions.each do |discussion| %>
   <tr>
-	  <td><%= discussion.title %></td>
+	  <td><strong><%= discussion.title %></strong></td>
 	  <td><%= discussion.description %></td>
-	  <td><%= discussion.due_date %></td>
+	  <td><%= standard_date(discussion.due_date) %></td>
+	  <td><%= link_to "Edit", edit_project_discussion_path(@project.id, discussion), class: "btn btn-default" %><td>
 	  <td><%= link_to "Delete", project_discussion_path(@project, discussion), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger" %></td>
 	</tr>
-		<tr>
-   <td>Comments: 
+		<tr class="header-bg">
+   		<td colspan="5"><button class="btn btn-xs" id="comments_button">Show Comments (<%= discussion.comments_count %>)</button>
    	<% discussion.comments.each do |comment| %>
-  	<%= comment.body %>
+   	<tr class="comments_container">	
+			<td colspan="5"><%= comment.body %></td>
+  		<td><%= link_to "Delete", discussion_comment_path(discussion, comment.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger" %></td>
+  	</tr>
   	<% end %>
   	</td>
   </tr>
-	<tr colspan="4">
+  </div>
+
+	<tr colspan="5">
 		<td><%= form_for [discussion, @comment || Comment.new ] do |f| %>
   		<div class="form-inline">
     		<%= f.text_area :body, class: "form-control", placeholder: "Comment", rows: 2 %>

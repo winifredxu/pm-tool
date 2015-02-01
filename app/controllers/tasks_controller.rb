@@ -1,5 +1,6 @@
 class TasksController < ApplicationController
   before_action :find_project
+  before_action :authenticate_user!
 
   def create
     @task = @project.tasks.new task_params
@@ -11,9 +12,23 @@ class TasksController < ApplicationController
   end
 
   def destroy
+
+    @project = Project.find @task.project_id
     @task = Task.find params[:id]
     @task.destroy
     redirect_to @project, notice: "Task deleted successfully"
+  end
+
+  def edit
+  end
+
+  def update
+    if @task.update task_params
+      redirect_to project_path
+      flash[:success] = "Task was successfully edited."
+    else
+      render :edit
+    end
   end
 
 
@@ -24,6 +39,6 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:title, :due_date)
+    params.require(:task).permit(:title, :due_date, :status)
   end
 end
