@@ -20,7 +20,7 @@ class DiscussionsController < ApplicationController
     @project = Project.find @discussion.project_id
     if @discussion.update discussion_params
       redirect_to project_path(@discussion.project_id)
-      flash[:success] = "Request was successfully edited."
+      flash[:success] = "Discussion was successfully edited."
     else
       render :edit
     end
@@ -29,7 +29,8 @@ class DiscussionsController < ApplicationController
   def destroy
     @discussion = Discussion.find params[:id]
     @discussion.destroy
-    redirect_to @project, notice: "Discussion deleted successfully"
+    redirect_to @project
+    flash[:success] = "Discussion was successfully edited."
   end
 
 

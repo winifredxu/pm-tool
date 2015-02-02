@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   end
 
   resources :discussions, only: [] do
-    resources :comments, only: [:create, :destroy]
+    resources :comments, only: [:create, :destroy, :edit, :update]
   end
   
   root to: "projects#index"

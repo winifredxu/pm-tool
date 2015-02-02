@@ -17,7 +17,8 @@ class TasksController < ApplicationController
     @project = Project.find task.project_id
     
     task.destroy
-    redirect_to project_path(task.project_id), notice: "Task deleted successfully"
+    redirect_to project_path(task.project_id)
+    flash[:success] = "Task was successfully deleted."
   end
 
   def edit

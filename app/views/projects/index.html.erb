@@ -1,11 +1,6 @@
 <div class="container" max-width="90%">
 		<h1>Welcome to your projects!</h1>
 	
-	<div id="alerts">
-		<% if flash[:success] %>
-		<div class="alert alert-success" role="alert"><%= flash[:success] %></div>
-		<% end %>
-	</div>
 			<div class="input-group search">
 			<form action="<%= projects_path %>" method="get">
 				<%= text_field_tag :search, params[:search], class: "form-control", placeholder: "Search" %>

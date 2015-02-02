@@ -1,33 +1,95 @@
 @import 'bootstrap-sprockets';
 @import 'bootstrap';
 
+
+a {
+	color: white;
+	font-weight: bold;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #FF3399;
+}
+
+a:active {
+    text-decoration: underline;
+}
+header {
+	display: block;
+	height: 50px;
+	background: black;
+	margin-bottom: 20px;
+}
 ul {
-	margin-top: 15px;
+	padding-left: 40px;
+	padding-top: 12px;
+	padding-right: 35px;
+
 }
 
 
 li {
  display: inline;
+ color: white;
 }
-
-.header-bg {
- 	background-image: -ms-linear-gradient(right, #FFFFFF 0%, #00A3EF 200%)
- 	background-image: -moz-linear-gradient(right, #FFFFFF 0%, #00A3EF 200%)
- 	background-image: -o-linear-gradient(right, #FFFFFF 0%, #00A3EF 200%)
- 	background-image: -webkit-gradient(linear, right top, left top, color-stop(0, #FFFFFF), color-stop(2, #00A3EF))
- 	background-image: -webkit-linear-gradient(right, #FFFFFF 0%, #00A3EF 200%)
- 	background-image: linear-gradient(to left, #FFFFFF 0%, #00A3EF 200%)
- }
 
 .search {
 	position: absolute;
-	right: 90px;
+	right: 140px;
 	margin-top: -45px;
 
+}
+.nav-user {
+	transform: translateY(-20px);
 }
 
 .search_btn {
 	position: absolute;
-	left: 172px;
+	left: 170px;
 	margin-bottom: 30px;
+}
+
+thead {
+	font-weight: bold;
+	color: #666;
+}
+
+textarea {
+    resize: none;
+}
+.button-spacing {
+	.btn
+		padding-left: 10px;
+}
+
+.category-headers {
+	color: #FF3399;
+}
+
+table {
+	max-width: 600px;
+}
+
+#comments_button {
+	background: black;
+	color: white;
+}
+
+.col-sm-12 {
+	padding: 0;
+}
+
+.borderless {
+	tbody th td
+		border: none;
+		border-top: none; 
 }

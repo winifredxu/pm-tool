@@ -1,3 +1,11 @@
+<% if @task.errors.any? %>
+  <ul>
+    <% @task.errors.full_messages.each do |msg| %>
+      <li class="alert alert-danger"><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+
 <%= form_for [@project, @task] do |f| %>
 	<%= f.label :title %>
 	<br>
@@ -7,6 +15,6 @@
 	<br>
 	<%= f.text_field :due_date, class: "form-control" %>
 	<br>
-	<%= f.submit class: "btn btn-primary" %>
+	<%= f.submit class: "btn btn-default" %>
 	<%= button_tag "Reset", type: :reset %>
 <% end %>
