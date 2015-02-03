@@ -1,0 +1,49 @@
+<% @project.tasks.each do |task| %>
+      <% if !task.status? %>    
+        <tr>
+          <td><strong><%= task.title %></strong></td>
+          <td><%= standard_date(task.due_date) %></td>
+          <td>
+            <% if task.status? %>
+            <%= link_to "Done :D", project_task_path(@project, task, task: { status: false }), method: :patch, class: "btn btn-sm btn-success" %>
+            <% else %>
+            <%= link_to "To Do", project_task_path(@project, task, task: { status: true }), method: :patch, class: "btn btn-sm btn-warning" %>
+            <% end %>
+          </td>
+          <td align="right"><%= link_to "Edit", edit_project_task_path(@project, task), class: "btn btn-default" %>&nbsp;<%= link_to "Delete", project_task_path(@project, task), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger" %></td>
+        </tr>
+      <% end %>
+      <% end %>
+    </table>
+  </div>
+
+  <div class="col-sm-6">
+    <h4>Completed Tasks</h4>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <td>Title</td>
+          <td>Due Date</td>
+          <td colspan="2">Status</td>
+        </tr>
+      </thead>
+
+      <% @project.tasks.each do |task| %>
+      <% if task.status? %>
+
+      <tr>
+        <td><strong><%= task.title %></strong></td>
+        <td><%= standard_date(task.due_date) %></td>
+        <td>
+          <% if task.status? %>
+          <%= link_to "Done :D", project_task_path(@project, task, task: { status: false }), method: :patch, class: "btn btn-sm btn-success" %>
+          <% else %>
+          <%= link_to "To Do", project_task_path(@project, task, task: { status: true }), method: :patch, class: "btn btn-sm btn-warning" %>
+          <% end %>
+        </td>
+        <td align="right"><%= link_to "Edit", edit_project_task_path(@project, task), class: "btn btn-default" %>&nbsp;<%= link_to "Delete", project_task_path(@project, task), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger" %></td>
+      </tr>
+      <% end %>
+      <% end %>
+    </table>
+  </div>

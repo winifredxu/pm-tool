@@ -5,11 +5,22 @@ class TasksController < ApplicationController
 
   def create
     @task = @project.tasks.new task_params
+    respond_to do |format|
     if @task.save
-      redirect_to @project, notice: "Task created successfully"
+      format html { redirect_to @project, flash[:success] = "Task was successfully added!" }
+      format js { render }
     else
       render "projects/show/"
     end
+    #   respond_to do |format|
+    #     format.html { redirect_to @project, notice: "Task created successfully" }
+    #     format.js { render }
+    #   end 
+    # else
+    #   format.js { render }
+
+
+    
   end
 
   def destroy
@@ -17,8 +28,12 @@ class TasksController < ApplicationController
     @project = Project.find task.project_id
     
     task.destroy
-    redirect_to project_path(task.project_id)
     flash[:success] = "Task was successfully deleted."
+    
+    respond_to do |format|
+      format.html { redirect_to @project }
+      format.js { render }
+    end
   end
 
   def edit

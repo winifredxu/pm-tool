@@ -29,8 +29,13 @@ class DiscussionsController < ApplicationController
   def destroy
     @discussion = Discussion.find params[:id]
     @discussion.destroy
-    redirect_to @project
-    flash[:success] = "Discussion was successfully edited."
+    flash[:success] = "Discussion was successfully deleted."
+
+    respond_to do |format|
+      format.html { redirect_to @project }
+      format.js   { render }
+    end
+
   end
 
 
