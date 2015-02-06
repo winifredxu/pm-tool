@@ -3,8 +3,8 @@ class MembersController < ApplicationController
 	  before_action :authenticate_user!
 
   def create
-    project  = Project.find params[:project_id]
-    member      = project.members.new
+    project  = Project.friendly.find params[:project_id]
+    member   = project.members.new
     like.user = current_user
     if like.save
       redirect_to project, notice: "Member added!"
@@ -14,7 +14,7 @@ class MembersController < ApplicationController
   end
 
   def destroy
-    project = Project.find params[:project_id]
+    project = Project.friendly.find params[:project_id]
     member    = project.members.find params[:id]
     if member.destroy
       redirect_to project, notice: "UnLiked!"

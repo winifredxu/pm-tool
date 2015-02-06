@@ -17,7 +17,7 @@ class DiscussionsController < ApplicationController
 
   def update
     @discussion = Discussion.find params[:id]
-    @project = Project.find @discussion.project_id
+    @project = Project.friendly.find @discussion.project_id
     if @discussion.update discussion_params
       redirect_to project_path(@discussion.project_id)
       flash[:success] = "Discussion was successfully edited."
@@ -46,7 +46,7 @@ class DiscussionsController < ApplicationController
   end
 
   def find_project
-    @project = Project.find params[:project_id]
+    @project = Project.friendly.find params[:project_id]
   end
 
 end

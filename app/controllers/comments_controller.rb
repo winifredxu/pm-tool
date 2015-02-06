@@ -3,7 +3,7 @@ class CommentsController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    @project = Project.find @discussion.project_id
+    @project = Project.friendly.find @discussion.project_id
     @comment = @discussion.comments.new comment_params
     if @comment.save
       redirect_to @project, notice: "Comment created successfully"
@@ -13,7 +13,7 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    @project = Project.find @discussion.project_id
+    @project = Project.friendly.find @discussion.project_id
     @comment = Comment.find params[:id]
     @comment.destroy
     redirect_to @project

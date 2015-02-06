@@ -22,10 +22,12 @@
 		<td><%= project.title %></td>
 		<td><%= project.description %></td>
 		<td><%= project.due_date %></td>
+
+
 		<td><%= link_to "Edit", edit_project_path(project), class: "btn btn-default" %></td>
 		<td>
-			<%= link_to "Details", project_path(project), class: "btn btn-default" %><td><%= link_to "Delete", project_path(project), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %></td>
-			<% end %>
+			<%= link_to "Details", project_path(project), class: "btn btn-default" %><td><%= link_to "Delete", project_path(project), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+			<% end %></td>
 		</tr>
 		
 	</table>

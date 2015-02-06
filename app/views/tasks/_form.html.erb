@@ -7,14 +7,9 @@
 <% end %>
 
 <%= form_for [@project, @task] do |f| %>
-	<%= f.label :title %>
-	<br>
-	<%= f.text_field :title, class: "form-control" %>
-	<br>
-	<%= f.label :due_date %>
-	<br>
-	<%= f.text_field :due_date, class: "form-control" %>
-	<br>
-	<%= f.submit class: "btn btn-default" %>
-	<%= button_tag "Reset", type: :reset %>
-<% end %>
+  <div class="form-inline">
+    <%= f.text_area :title, class: "form-control", placeholder: "Task Title", rows: 1 %>
+    <%= f.text_area :due_date, class: "form-control", placeholder: "Due Date", rows: 1 %>
+    <%= f.submit class: "btn btn-default" %><br>
+  </div>
+  <% end %>

@@ -1,6 +1,6 @@
 @import 'bootstrap-sprockets';
 @import 'bootstrap';
-
+@import 'bootstrap-datetimepicker';
 
 a {
 	color: white;
@@ -67,8 +67,9 @@ textarea {
     resize: none;
 }
 .button-spacing {
-	.btn
+	.btn {
 		padding-left: 10px;
+	}
 }
 
 .category-headers {
@@ -89,7 +90,8 @@ table {
 }
 
 .borderless {
-	tbody th td
+	tbody th td {
 		border: none;
-		border-top: none; 
+		border-top: none;
+	} 
 }

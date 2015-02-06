@@ -5,27 +5,39 @@ class TasksController < ApplicationController
 
   def create
     @task = @project.tasks.new task_params
-    respond_to do |format|
     if @task.save
-      format html { redirect_to @project, flash[:success] = "Task was successfully added!" }
-      format js { render }
+      redirect_to @project, notice: "Task created successfully"
     else
-      render "projects/show/"
+      redirect_to @project
+      #render "projects/show.html.erb"
     end
-    #   respond_to do |format|
-    #     format.html { redirect_to @project, notice: "Task created successfully" }
-    #     format.js { render }
-    #   end 
-    # else
-    #   format.js { render }
-
-
-    
   end
+
+  # def create
+  #   @task = @project.tasks.new task_params
+  #   #respond_to do |format|
+  #   if @task.save
+  #     redirect_to @project
+  #     #format.html { redirect_to @project }
+  #     #format.js { render }
+  #   else
+  #     render "projects/show/"
+    
+  #   #   respond_to do |format|
+  #   #     format.html { redirect_to @project, notice: "Task created successfully" }
+  #   #     format.js { render }
+  #   #   end 
+  #   # else
+  #   #   format.js { render }
+
+
+  #   end
+
+
 
   def destroy
     task = Task.find params[:id]
-    @project = Project.find task.project_id
+    @project = Project.friendly.find task.project_id
     
     task.destroy
     flash[:success] = "Task was successfully deleted."
@@ -42,7 +54,7 @@ class TasksController < ApplicationController
 
   def update
     @task = Task.find params[:id]
-    @project = Project.find @task.project_id
+    @project = Project.friendly.find @task.project_id
     if @task.update task_params
       redirect_to project_path(@task.project_id)
       flash[:success] = "Task was successfully edited."
@@ -55,7 +67,7 @@ class TasksController < ApplicationController
   private
 
   def find_project
-    @project = Project.find params[:project_id]
+    @project = Project.friendly.find params[:project_id]
   end
 
   def task_params

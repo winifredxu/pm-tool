@@ -7,7 +7,12 @@ gem 'rails', '4.2.0'
 gem 'pg'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
-
+gem 'carrierwave'
+gem 'simple_form'
+gem 'momentjs-rails', '>= 2.9.0'
+gem 'bootstrap3-datetimepicker-rails', '~> 4.0.0'
+gem 'friendly_id', '~> 5.1.0'
+gem 'cancancan'
 gem 'bootstrap-sass'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'

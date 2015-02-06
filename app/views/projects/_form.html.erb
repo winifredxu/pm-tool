@@ -1,32 +1,33 @@
-
-<% if @project.errors.any? %>
-  <ul>
-    <% @project.errors.full_messages.each do |msg| %>
-      <li class="alert alert-danger"><%= msg %></li>
-    <% end %>
-  </ul>
-<% end %>
-
-
-
-<%= form_for @project do |f| %>
-	<%= f.label :title %>
+<%= simple_form_for @project, html: { class: 'form-horizontal' } do |f| %>
+	<%= f.input :title %>
+  <%= f.input :description %>
+  <div class="form-group">
+      <div class='input-group date' id='datetimepicker1' data-date-format="yyyy-mm-dd">
+          <%= f.input :due_date, class: "form-control" %>
+          <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+          </span>
+      </div>
+  </div>
+<!-- 	<br>
+	<%#= f.text_field :title, class: "form-control" %>
 	<br>
-	<%= f.text_field :title, class: "form-control" %>
+	<%#= f.label :description %>
 	<br>
-	<%= f.label :description %>
+	<%#= f.text_field :description, class: "form-control" %>
 	<br>
-	<%= f.text_field :description, class: "form-control" %>
+	<%#= f.label :due_date %>
 	<br>
-	<%= f.label :due_date %>
-	<br>
-	<%= f.text_field :due_date, class: "form-control" %>
-	<br>
+	<%#= f.text_field :due_date, class: "form-control" %>
+	<br> -->
 	<%= f.submit class: "btn btn-default" %>
 	<%= button_tag "Reset", type: :reset %>
 <% end %>
 
-
+  <script type="text/javascript">
+      $(function () {
+          $('#datetimepicker1').datetimepicker();
+      });
+  </script>
 
 
 

@@ -2,6 +2,8 @@ class ProjectsController < ApplicationController
   before_action :authenticate_user!
   before_action :find_project,
     only: [:show, :edit, :update, :destroy, :search]
+  # before_action :restrict_access,
+  #   only: [:edit, :update, :destroy]
 
 
   def index
@@ -34,9 +36,11 @@ class ProjectsController < ApplicationController
   end
 
   def edit
+    #redirect_to root_path, alert: "access denied" unless can? :edit, @project
   end
 
   def update
+   # redirect_to root_path, alert: "access denied" unless can? :edit, @project
     if @project.update project_params
       redirect_to projects_path
       flash[:success] = "Request was successfully edited."
@@ -66,7 +70,14 @@ class ProjectsController < ApplicationController
   end
 
   def find_project
-    @project = Project.find params[:id]
+    @project = Project.friendly.find params[:id]
   end
+
+  def restrict_access
+    unless can? :manage, @project
+      redirect_to root_path, alert: "access denied" 
+    end
+  end
+
 
 end
