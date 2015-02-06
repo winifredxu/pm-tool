@@ -3,7 +3,7 @@
 
 <% else %>
 
-  $("#tasks").html("<%= render partial: "/tasks/tasks_table", locals: {tasks: @project.tasks.where(status: false)} %>");
+  $("#tasks").html("<%= render partial: "/tasks/tasks_table", locals: { project: @project, tasks: @project.tasks.where(status: false)} %>");
   
   <% @task = Task.new %> 
   

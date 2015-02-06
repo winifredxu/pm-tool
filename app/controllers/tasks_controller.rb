@@ -19,17 +19,18 @@ class TasksController < ApplicationController
   end
 
   def destroy
-    task = Task.find params[:id]
-    @project = Project.friendly.find task.project_id
+    @task = Task.find params[:id]
+    @project = Project.friendly.find @task.project_id
 
-    task.destroy
+    @task.destroy
     flash[:success] = "Task was successfully deleted."
 
     respond_to do |format|
-      format.html { redirect_to @project }
+      format.html { redirect_to @project, notice: "Task deleted" }
       format.js   { render }
     end
   end
+
 
   def edit
     @task = @project.tasks.find params[:id]
@@ -39,8 +40,10 @@ class TasksController < ApplicationController
     @task = Task.find params[:id]
     @project = Project.friendly.find @task.project_id
     if @task.update task_params
-      flash[:success] = "Task was successfully edited."
-      redirect_to project_path(@task.project_id)
+      respond_to do |format|
+        format.html { redirect_to project_path(@task.project_id), notice: "Task updated" }
+        format.js   { render }
+      end
     else
       render :edit
     end

@@ -13,9 +13,9 @@
     <td><%= standard_date(task.due_date) %></td>
     <td>
       <% if task.status? %>
-      <%= link_to "Done :D", project_task_path(@project, task, task: { status: false }), method: :patch, class: "btn btn-sm btn-success" %>
+      <%= link_to "Done :D", project_task_path(@project, task, task: { status: false }), method: :patch, class: "btn btn-sm btn-success", remote: true %>
       <% else %>
-      <%= link_to "To Do", project_task_path(@project, task, task: { status: true }), method: :patch, class: "btn btn-sm btn-warning" %>
+      <%= link_to "To Do", project_task_path(@project, task, task: { status: true }), method: :patch, class: "btn btn-sm btn-warning", remote: true %>
       <% end %>
     </td>
     <td align="right"><%= link_to "Edit", edit_project_task_path(@project, task), class: "btn btn-default" %>&nbsp;<%= link_to "Delete", project_task_path(@project, task), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger", remote: true %></td>
@@ -23,5 +23,7 @@
   <% end %>
   </tbody>
 </table>
+
+
 
 
