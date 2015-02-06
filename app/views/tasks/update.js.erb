@@ -1,1 +1,12 @@
-$("#<%= dom_id(@task) %>").fadeOut();
+
+  
+
+<% if @task.status? %>
+  $("#<%= dom_id(@task) %>").fadeOut();
+  $("#tasks-done").html("<%= j render partial: "/tasks/tasks_table", locals: { project: @project, tasks: @project.tasks.where(status: true)} %>");
+
+<% else %>
+  $("#<%= dom_id(@task) %>").fadeOut();
+  $("#tasks").html("<%= j render partial: "/tasks/tasks_table", locals: { project: @project, tasks: @project.tasks.where(status: false)} %>");
+
+<% end %>
