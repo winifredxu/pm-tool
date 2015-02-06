@@ -1,12 +1,4 @@
-<% if @task.errors.any? %>
-  <ul>
-    <% @task.errors.full_messages.each do |msg| %>
-      <li class="alert alert-danger"><%= msg %></li>
-    <% end %>
-  </ul>
-<% end %>
-
-<%= form_for [@project, @task] do |f| %>
+<%= form_for [@project, @task], remote: true do |f| %>
   <div class="form-inline">
     <%= f.text_area :title, class: "form-control", placeholder: "Task Title", rows: 1 %>
     <%= f.text_area :due_date, class: "form-control", placeholder: "Due Date", rows: 1 %>

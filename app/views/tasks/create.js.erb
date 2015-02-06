@@ -1,11 +1,11 @@
 <% if @task.errors.any? %>
-  $(".task-form").html("<%= j render partial: "/tasks/tasks_table" %>");
+  $(".task-form").html("<%= j render partial: "/tasks/form" %>");
 
 <% else %>
-  
-  $(".tasks").prepend("<%= j render partial: "/tasks/tasks_table", locals: {task: @task} %>");
+
+  $("#tasks").html("<%= render partial: "/tasks/tasks_table", locals: {tasks: @project.tasks.where(status: false)} %>");
   
   <% @task = Task.new %> 
   
-  $(".task-form").html("<%= j render partial: "/tasks/tasks_table" %>");
+  $(".task-form").html("<%= j render partial: "/tasks/form" %>");
 <% end %>
