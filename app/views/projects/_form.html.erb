@@ -1,9 +1,22 @@
+<script type="text/javascript">
+  $(function () {
+    $('#datetimepicker1').datetimepicker();
+  });
+</script>
+
 <div class="form-group">
   <h1>Create New Project</h1>
   <%= simple_form_for @project, html: { class: 'form-horizontal' } do |f| %>
   <%= f.input :title, class: "form-control" %>
   <%= f.input :description, class: "form-control" %>
-  <%= f.input :due_date, class: "form-control" %>
+    
+  <div class="input-group date form-group" id="datetimepicker1">
+    <%= f.text_field :due_date, class: "form-control", placeholder: "Due Date" %>
+    <span class="input-group-addon">
+    <span class="glyphicon glyphicon-calendar"></span>
+    </span>
+  </div>
+  
   <%= f.submit class: "btn btn-default" %>
   <%= button_tag "Reset", type: :reset %>
 <% end %>

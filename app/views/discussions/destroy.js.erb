@@ -1,1 +1,1 @@
-$("#<%= dom_id(@discussion) %>").fadeOut();
+  $("#<%= dom_id(@discussion)%>").css("background", "red").fadeOut("slow", function () { $(this).remove() }); 

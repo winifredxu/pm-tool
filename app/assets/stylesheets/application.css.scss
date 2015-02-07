@@ -30,17 +30,24 @@ header {
 	background: black;
 	margin-bottom: 20px;
 }
-// ul {
-// 	padding-left: 40px;
-// 	padding-top: 12px;
-// 	padding-right: 35px;
+.menu {
+	color: #555;
 
-// }
+	ul {
+		padding-left: 120px;
+		padding-top: 12px;
+		padding-right: 35px;
+	}
+	li {
+		color: white;
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+}
 
 
 li {
  display: inline;
- // color: white;
 }
 
 .search {
@@ -99,5 +106,5 @@ table {
 }
 
 .highlight {
-	background-color: #00FFFF;
+	background-color: white;
 }
