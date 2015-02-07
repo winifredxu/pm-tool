@@ -1,0 +1,19 @@
+<% if @discussion.errors.any? %>
+  $(".discussion-form").html("<%= j render partial: "/discussions/form" %>");
+
+<% else %>
+
+  $("#discussions").html("<%= j render partial: "/discussions/discussions_table", locals: { project: @project, discussions: @project.discussions.where(status: false)} %>");
+  
+  $("#<%= dom_id(@discussion) %>").addClass('highlight').delay(800).removeClass('highlight');
+
+
+  setTimeout(function() {
+   $("<%= dom_id(@discussion)%>").css("background-color", "aqua").effect("highlight", {}, 3000);
+    }, 2000);
+  
+  <% @discussion = Discussion.new %> 
+  
+  $("#discussion-form").html("<%= j render partial: "/discussions/form" %>");
+<% end %>
+

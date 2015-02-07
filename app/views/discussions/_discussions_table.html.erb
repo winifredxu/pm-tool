@@ -1,0 +1,40 @@
+<h4>Discussions</h4>
+<table class="table borderless">
+  <thead>
+    <tr>
+      <td>Title</td>
+      <td>Description</td>
+      <td colspan="2">Due Date</td>
+    </tr>
+  </thead>
+  <% @project.discussions.each do |discussion| %>
+  <tbody id="<%= dom_id(discussion)%>">
+    <tr>
+      <td><%= discussion.title %></td>
+      <td><%= discussion.description %></td>
+      <td><%= standard_date(discussion.due_date) %></td>
+      <td class="pull-right"><%= link_to "Edit", edit_project_discussion_path(@project, discussion), class: "btn btn-default" %>&nbsp;<%= link_to "Delete", project_discussion_path(@project, discussion), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger", remote: true %></td>
+    </tr>
+    <tr>
+      <td colspan="4"><%= form_for [discussion, @comment || Comment.new ] do |f| %>
+        <div>
+          <%= f.text_area :body, class: "form-control", placeholder: "Comment", rows: 2 %>
+        <br><%= f.submit class: "form-comment btn btn-sm btn-default" %></td>
+      </div>
+      <% end %>
+    </tr>
+    <tr>
+      <td colspan="4">
+        <% if !discussion.comments.empty? %>
+        <button class="btn btn-xs" id="comments_button">Toggle Comments (<%= discussion.comments_count %>)</button></td>
+      <% discussion.comments.each do |comment| %>
+      <tr class="comments_container" id="<%= dom_id(comment) %>">
+        <td colspan="3" class="comment-text"><em>"<%= comment.body %>"</em></td>
+        <td align="right"><%= link_to "Edit", edit_discussion_comment_path(discussion, comment), class: "btn btn-xs btn-default", remote: true %>&nbsp;<%= link_to "Delete", discussion_comment_path(discussion, comment.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-xs btn-danger", remote: true %></td>
+        <% end %>
+      </tr>
+      <% end %>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

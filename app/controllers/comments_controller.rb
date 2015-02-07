@@ -16,8 +16,10 @@ class CommentsController < ApplicationController
     @project = Project.friendly.find @discussion.project_id
     @comment = Comment.find params[:id]
     @comment.destroy
-    redirect_to @project
-    flash[:success] = "Comment was successfully edited."
+      respond_to do |format|
+        format.html { redirect_to @project, notice:"Comment was successfully edited." }
+        format.js { render }
+      end
   end
 
   def edit
@@ -28,8 +30,10 @@ class CommentsController < ApplicationController
     @comment = Comment.find params[:id]
     @discussion = Discussion.find @comment.discussion_id
     if @comment.update comment_params
-      redirect_to project_path(@discussion.project_id)
-      flash[:success] = "Comment was successfully edited."
+      respond_to do |format|
+        format.html { redirect_to project_path(@discussion.project_id), notice: "Comment updated"}
+        format.json { respond_with_bip(@comment) }
+      end
     else
       render :edit
     end

@@ -2,6 +2,7 @@
 @import 'bootstrap';
 @import 'bootstrap-datetimepicker';
 
+
 a {
 	color: white;
 	font-weight: bold;
@@ -29,17 +30,17 @@ header {
 	background: black;
 	margin-bottom: 20px;
 }
-ul {
-	padding-left: 40px;
-	padding-top: 12px;
-	padding-right: 35px;
+// ul {
+// 	padding-left: 40px;
+// 	padding-top: 12px;
+// 	padding-right: 35px;
 
-}
+// }
 
 
 li {
  display: inline;
- color: white;
+ // color: white;
 }
 
 .search {
@@ -89,9 +90,14 @@ table {
 	padding: 0;
 }
 
-.borderless {
-	tbody th td {
-		border: none;
-		border-top: none;
-	} 
+.borderless > tbody > tr > td {
+    border: none;
+}
+
+.comment-text {
+	font-size: 13px;
+}
+
+.highlight {
+	background-color: #00FFFF;
 }

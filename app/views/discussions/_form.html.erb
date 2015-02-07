@@ -1,21 +1,22 @@
-<%= form_for [@project, @discussion] do |f| %>
-	<%= f.label :title %>
-	<br>
-	<%= f.text_field :title, class: "form-control" %>
-	<br>
-	<%= f.label :description %>
-	<br>
-	<%= f.text_field :description, class: "form-control" %>
-	<br>
-	<%= f.label :due_date %>
-	<br>
-	<%= f.text_field :due_date, class: "form-control" %>
-	<br>
+<script type="text/javascript">
+	$(function () {
+		$('#datetimepicker1').datetimepicker();
+	});
+</script>
+
+<h3 class="category-headers">New Discussion</h3>
+<%= form_for [@project, @discussion], remote: true do |f| %>
+<div class="form-inline">
+	<%= f.text_area :title, class: "form-control", placeholder: "Title", rows: 1 %>
+	<%= f.text_area :description, class: "form-control", placeholder: "Description", rows: 1 %>
+	<div class="input-group date form-group" id="datetimepicker1">
+		<%= f.text_field :due_date, class: "form-control", placeholder: "Due Date" %>
+		<span class="input-group-addon">
+		<span class="glyphicon glyphicon-calendar"></span>
+		</span>
+	</div>
 	<%= f.submit class: "btn btn-default" %>
-	<%= button_tag "Reset", type: :reset %>
+</div>
 <% end %>
-
-
-
-
-
+<br>
+<br>

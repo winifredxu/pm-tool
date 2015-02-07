@@ -4,11 +4,15 @@ class DiscussionsController < ApplicationController
 
   def create
    @discussion = @project.discussions.new discussion_params
+   respond_to do |format|
     if @discussion.save
-      redirect_to @project, notice: "Discussion created successfully"
+      format.html { redirect to @project, notice: "Discussion created successfully" }
+      format.js { render }
     else
-      render "projects/show/"
+      render.html { redirect_to "projects/show/" }
+      render.js { render }
     end
+  end
   end
 
   def edit

@@ -46,8 +46,9 @@ class TasksController < ApplicationController
       end
     else
       render :edit
-    end
+
   end
+end
 
 
   private
