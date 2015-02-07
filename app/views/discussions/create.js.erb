@@ -5,12 +5,8 @@
 
   $("#discussions").html("<%= j render partial: "/discussions/discussions_table", locals: { project: @project, discussions: @project.discussions.where(status: false)} %>");
   
-  //$("#<%= dom_id(@discussion) %>").addClass('highlight').delay(800).removeClass('highlight');
+  //$("#<%= dom_id(@discussion)%>").css("background", "#E0FFEB").fadeOut("slow"); 
 
-  $("#<%= dom_id(@discussion)%>").css("background", "red").fadeOut("slow", function () { $(this).remove() }); 
-  // setTimeout(function() {
-  //  $("#<%= dom_id(@discussion)%>").css("background-color", "aqua").effect("highlight", {}, 3000);
-  //   }, 0);
 
   <% @discussion = Discussion.new %> 
   

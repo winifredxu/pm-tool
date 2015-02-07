@@ -8,7 +8,7 @@
     </tr>
   </thead>
   <% @project.discussions.each do |discussion| %>
-  <tbody id="<%= dom_id(discussion)%>">
+  <tbody class=" table-bg" id="<%= dom_id(discussion)%>">
     <tr>
       <td><%= discussion.title %></td>
       <td><%= discussion.description %></td>

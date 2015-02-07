@@ -3,4 +3,6 @@ class Task < ActiveRecord::Base
   validates :title, presence: true
 
   default_scope { order("status ASC") }
+
+  
 end

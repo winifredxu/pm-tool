@@ -42,12 +42,8 @@ header {
 		color: white;
 		padding-left: 10px;
 		padding-right: 10px;
+		display: inline;
 	}
-}
-
-
-li {
- display: inline;
 }
 
 .search {
@@ -69,6 +65,8 @@ li {
 thead {
 	font-weight: bold;
 	color: #666;
+	border: none;
+	padding: 20px;
 }
 
 textarea {
@@ -86,6 +84,18 @@ textarea {
 
 table {
 	max-width: 600px;
+	padding: 20px;
+}
+
+td {
+	padding: 20px;      
+}
+
+.table-bg {
+		border-radius: 8px;
+    box-shadow: 0 0 5px #EEEEEE;
+    padding:0 15px 0 15px;
+    border: 1px solid #F3F3F3;
 }
 
 #comments_button {
