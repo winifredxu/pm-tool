@@ -2,7 +2,32 @@
 <div class="project-details">
 	<strong>Description:</strong> <%= @project.description %><br>
 	<strong>Due Date:</strong> <%= standard_date(@project.due_date) %>
+	<strong>Members:</strong>
 </div>
+
+
+<ul>
+  <% @project.errors.full_messages.each do |msg| %>
+  <li><%= msg %></li>
+  <% end %>
+</ul>
+
+
+  <ul>
+  <% @members.each do |member| %>
+  <li><%= member %></li>
+  <% end %>
+</ul>
+
+
+
+
+
+
+
+
+
+
 <hr>
 <% if @task.errors.any? %>
 <ul>

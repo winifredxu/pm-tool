@@ -5,7 +5,7 @@ class Discussion < ActiveRecord::Base
   validates :title, presence: true
   validates :description, presence: true
 
-    def comments_count
+  def comments_count
   	comments.count 
   end
 

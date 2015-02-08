@@ -20,7 +20,9 @@
     <span class="glyphicon glyphicon-calendar"></span>
     </span>
   </div>
-  
+  <%= f.label :project_members %>
+  <%= f.collection_check_boxes :project_member_ids, User.all, :id, :full_name %>
+
   <%= f.submit class: "btn btn-default" %>
   <%= button_tag "Reset", type: :reset %>
 <% end %>

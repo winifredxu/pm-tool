@@ -53,6 +53,7 @@ class ProjectsController < ApplicationController
     @task = Task.new
     @discussion = Discussion.new
     @comment = Comment.new
+    @members = find_member_names
   end
 
 
@@ -66,7 +67,7 @@ class ProjectsController < ApplicationController
 
   def project_params
     params.require(:project).permit(:title,
-                                    :description, :due_date, :search)
+                                    :description, :due_date, :search, {project_member_ids: []})
   end
 
   def find_project
@@ -78,6 +79,11 @@ class ProjectsController < ApplicationController
       redirect_to root_path, alert: "access denied" 
     end
   end
+
+  def find_member_names
+    @project.members.map { |member| user = User.find member.user_id; user.first_name + ' ' + user.last_name }
+  end
+
 
 
 end

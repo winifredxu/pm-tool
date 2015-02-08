@@ -2,5 +2,7 @@ class Member < ActiveRecord::Base
   belongs_to :user
   belongs_to :project
 
-  validates :project_id, uniqueness: {scope: :user_id}
+  validates :project, presence: true, uniqueness: { scope: :user }
+  validates :user, presence: true
+
 end

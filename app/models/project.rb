@@ -1,8 +1,13 @@
 class Project < ActiveRecord::Base
 	has_many :discussions, dependent: :destroy
   has_many :tasks, dependent: :destroy
-  has_many :members, dependent: :nullify
-  has_many :users, through: :members
+  
+  has_many :members, dependent: :destroy
+  has_many :project_members, through: :members, source: :user
+
+
+
+  #has_many :users, through: :members
   
   default_scope { order("due_date ASC") }
   
@@ -15,6 +20,7 @@ class Project < ActiveRecord::Base
 
   extend FriendlyId
   friendly_id :title, use: :slugged
+
 
   # def to_param
   #   "#{id}-#{title}".parameterize

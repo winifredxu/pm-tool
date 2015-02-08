@@ -17,9 +17,9 @@ class MembersController < ApplicationController
     project = Project.friendly.find params[:project_id]
     member    = project.members.find params[:id]
     if member.destroy
-      redirect_to project, notice: "UnLiked!"
+      redirect_to project, notice: "Removed member"
     else
-      redirect_to project, alert: "Can't UnLike!"
+      redirect_to project, alert: "You cannot do this."
     end
   end
 end
