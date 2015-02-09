@@ -15,6 +15,7 @@ gem 'bootstrap3-datetimepicker-rails', '~> 4.0.0'
 gem 'friendly_id', '~> 5.1.0'
 gem 'cancancan'
 gem 'bootstrap-sass'
+
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
@@ -40,6 +41,7 @@ group :development do
 	gem "hirb"
 	gem "awesome_print"
 	gem "faker"
+  gem "letter_opener"
 end
 
 group :development, :test do

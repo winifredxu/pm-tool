@@ -5,8 +5,10 @@ class TasksController < ApplicationController
 
   def create
     @task = @project.tasks.new task_params
+    @user = @project.user
     respond_to do |format|
       if @task.save
+        TasksMailer.notify_project_members(@task).deliver_now
         format.html { redirect_to @project, notice: "Task created successfully!"}
         format.js   { render }
       else

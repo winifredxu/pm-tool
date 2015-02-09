@@ -5,6 +5,8 @@ class Discussion < ActiveRecord::Base
   validates :title, presence: true
   validates :description, presence: true
 
+  default_scope { order("updated_at ASC") }
+
   def comments_count
   	comments.count 
   end
