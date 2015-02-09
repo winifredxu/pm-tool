@@ -2,7 +2,10 @@
 <div class="project-details">
 	<strong>Description:</strong> <%= @project.description %><br>
 	<strong>Due Date:</strong> <%= standard_date(@project.due_date) %><br>
-	<strong>Members:</strong> <% @members.each do |member| %><%= member%> | <% end %>
+	<strong>Members:</strong> <% @members.each do |member| %><%= member%> , <% end %><br>
+  <% if @project.favorited_users.present? %>
+  <strong>Favorited by:</strong> <%= @project.favorited_users.map(&:full_name).join(", ") %>
+<% end %>
 </ul>
 
   </strong>
@@ -13,8 +16,10 @@
   <% @project.errors.full_messages.each do |msg| %>
   <li><%= msg %></li>
   <% end %>
-</ul>
+  </ul> 
 
+
+<% if @project.user != current_user %>
 <% if user_signed_in? && !current_user.has_favorited?(@project) %>
 <%= link_to "Favorite", project_favorites_path(@project, @favorite), class: "btn btn-xs btn-default", method: :post %>
 <% end %>
@@ -23,6 +28,9 @@
 <% @favorite = current_user.favorites.find_by_project_id(@project) %>
 <%= link_to "Unfavorite", project_favorite_path(@project, @favorite), class: "btn btn-xs btn-default", method: :delete %>
 <% end %>
+<% end %>
+
+
 
 
 

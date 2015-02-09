@@ -1,4 +1,5 @@
 class Project < ActiveRecord::Base
+  belongs_to :user
 	has_many :discussions, dependent: :destroy
   has_many :tasks, dependent: :destroy
   
@@ -8,7 +9,7 @@ class Project < ActiveRecord::Base
   has_many :favorites, dependent: :destroy
   has_many :favorited_users, through: :favorites, source: :user
 
-  
+
 
 
 

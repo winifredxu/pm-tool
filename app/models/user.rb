@@ -4,10 +4,10 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
     :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :projects, dependent: :nullify
-  has_many :tasks, dependent: :nullify
+  has_many :projects, dependent: :destroy
+  has_many :tasks, dependent: :destroy
 
-  has_many :discussions, dependent: :nullify
+  has_many :discussions, dependent: :destroy
   has_many :comments, dependent: :nullify
 
   has_many :members, dependent: :destroy
