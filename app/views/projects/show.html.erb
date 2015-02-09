@@ -1,22 +1,54 @@
 <div class="project-area"><span class="label label-default">Project Name</span><h1><%= @project.title %></h1></div>
 <div class="project-details">
 	<strong>Description:</strong> <%= @project.description %><br>
-	<strong>Due Date:</strong> <%= standard_date(@project.due_date) %><br>
-	<strong>Members:</strong> <% @members.each do |member| %><%= member%> , <% end %><br>
-  <% if @project.favorited_users.present? %>
-  <strong>Favorited by:</strong> <%= @project.favorited_users.map(&:full_name).join(", ") %>
-<% end %>
-</ul>
+	
+  <% if @project.due_date.present? %>
+    <strong>Due Date:</strong> <%= standard_date(@project.due_date) %><br>
+  <% end %>
 
-  </strong>
+  <% if @members.present? %>
+    <strong>Members:</strong> <% @members.each do |member| %><%= member%> , <% end %><br>
+  <% end %>
+
+  <% if @project.favorited_users.present? %>
+   <strong>Favorited by:</strong> <%= @project.favorited_users.map(&:full_name).join(", ") %>
+  <% end %>
+
+  <% if @taggings.present? %>
+    <strong>Tags:</strong> 
+   
+    <% @taggings.each do |tag|%>
+      
+      <% if tag == "Misc" %>
+        <span class="glyphicon glyphicon-tag misc"></span> <%= tag %>
+      <% end %>
+      
+      <% if tag == "Client" %>
+        <span class="glyphicon glyphicon-tag client"></span> <%= tag %>
+      <% end %>
+      
+      <% if tag == "Design" %>
+        <span class="glyphicon glyphicon-tag design"></span> <%= tag %>
+      <% end %>
+      
+      <% if tag == "Backend" %>
+        <span class="glyphicon glyphicon-tag backend"></span> <%= tag %>
+      <% end %>
+      
+      <% if tag == "Server" %>
+        <span class="glyphicon glyphicon-tag server"></span> <%= tag %>
+      <% end %>
+    <% end %>
+  <% end %>
+
 </div>
 
 
 <ul>
   <% @project.errors.full_messages.each do |msg| %>
-  <li><%= msg %></li>
+    <li><%= msg %></li>
   <% end %>
-  </ul> 
+</ul> 
 
 
 <% if @project.user != current_user %>
@@ -30,38 +62,6 @@
 <% end %>
 <% end %>
 
-<% if @taggings.present? %>
-    <% @taggings.each do |tag|%>
-      <% if tag == "Misc" %>
-      <span class="glyphicon glyphicon-tag misc"></span> <%= tag %>
-       <% end %>
-      <% if tag == "Client" %>
-      <span class="glyphicon glyphicon-tag client"></span> <%= tag %>
-       <% end %>
-      <% if tag == "Design" %>
-      <span class="glyphicon glyphicon-tag design"></span> <%= tag %>
-       <% end %>
-      <% if tag == "Backend" %>
-      <span class="glyphicon glyphicon-tag backend"></span> <%= tag %>
-      <% end %>
-      <% if tag == "Server" %>
-      <span class="glyphicon glyphicon-tag server"></span> <%= tag %>
-       <% end %>
-<% end %>
-<% end %>
-
-
-
-
-
-
-
-
-
-
-
-
-
 <hr>
 <% if @task.errors.any? %>
 <ul>
@@ -70,6 +70,7 @@
 	<% end %>
 </ul>
 <% end %>
+
 <div class="col-sm-12">
 	<h3 class="category-headers">New Task</h3>
 	<%# form_for @task, url: project_tasks_path(@project) do |f| %>
@@ -77,6 +78,7 @@
 		<%= render partial: "/tasks/form", locals: {tasks: @project.tasks, project: @project } %>
 	</div>
 	<br>
+  <% if @project.tasks.present? %>
 	<div class="col-sm-6">
 		<h4>Pending Tasks</h4>
 			<div id="tasks">
@@ -89,6 +91,8 @@
 			<%= render partial: "/tasks/tasks_table", locals: {tasks: @project.tasks.where(status: true)} %>
 			</div>
 	</div>
+  <% end %>
+
 	<div id="discussion-form" class="col-sm-12">
 
 			<%= render partial: "/discussions/form", locals: {project: @project, discussion: @discussion} %> 

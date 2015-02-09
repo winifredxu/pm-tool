@@ -32,8 +32,12 @@ class ProjectsController < ApplicationController
 
   def destroy
     @project.destroy
-    redirect_to projects_path
     flash[:success] = "Project successfully deleted."
+
+    respond_to do |format|
+      format.html { redirect_to projects_path, notice: "Project deleted"}
+      format.js { render }
+    end    
   end
 
   def edit
@@ -68,8 +72,8 @@ class ProjectsController < ApplicationController
   private
 
   def project_params
-    params.require(:project).permit(:title,
-                                    :description, :due_date, :search, {project_member_ids: []}, {tag_ids: []})
+    params.require(:project).permit(:title, :description,
+                                    :due_date, :search, {project_member_ids: []}, {tag_ids: []})
   end
 
   def find_project

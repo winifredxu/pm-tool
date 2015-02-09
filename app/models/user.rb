@@ -17,7 +17,6 @@ class User < ActiveRecord::Base
   has_many :favorited_projects, through: :favorites, source: :project
 
 
-
   def full_name
     if first_name || last_name
       "#{first_name} #{last_name}".squeeze(" ").strip

@@ -6,33 +6,41 @@
   });
 </script>
 
-
-
+<h1>Create New Project</h1><br>
+<div class="project-form">
 <div class="form-group">
-  <h1>Create New Project</h1>
-  <%= simple_form_for @project, html: { class: 'form-horizontal' } do |f| %>
-  <%= f.input :title, class: "form-control" %>
-  <%= f.input :description, class: "form-control" %>
-    
+
+  <%= form_for @project do |f| %>
+  <%= f.text_field :title, class: "form-control", placeholder: "Title" %><br>
+  <%= f.text_field :description, class: "form-control", placeholder: "Description", rows: 2 %>
+  <br>
   <div class="input-group date form-group" id="datetimepicker1">
     <%= f.text_field :due_date, class: "form-control", placeholder: "Due Date" %>
     <span class="input-group-addon">
-    <span class="glyphicon glyphicon-calendar"></span>
+      <span class="glyphicon glyphicon-calendar"></span>
     </span>
   </div>
-  <div class="checkbox">
+
+  <br>
+  <span class="glyphicon glyphicon-user pink"></span>
   <%= f.label :project_members %>
   <br>
+    <div class="checkbox">
   <%= f.collection_check_boxes :project_member_ids, User.all, :id, :full_name, wrapper: :vertical_radio_and_checkboxes %>
+  </div>
   <br>
   <hr>
+  <span class="glyphicon glyphicon-tag pink"></span>
   <%= f.label :tag %>
   <br>
+    <div class="checkbox">
   <%= f.collection_check_boxes :tag_ids, Tag.all, :id, :title %>
-  <br>
 </div>
+  <br>
+
   <hr>
   <%= f.submit class: "btn btn-default" %>
   <%= button_tag "Reset", type: :reset %>
 <% end %>
+</div>
 </div>

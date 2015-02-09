@@ -1,11 +1,11 @@
 <p>Hello!</p>
 
-<p>The project <%= project.title %> has been updated!</p>
+<p>The project <%= @task.title %> has been updated!</p>
 
 <p>The following tasks have been added: 
 
-<p><strong>Task: </strong><%= project.tasks.title.last %></p>
-<p><strong>Due Date: </strong><%= project.tasks.due_date.last %></p>
+<p><strong>Task: </strong><%= @task.title %></p>
+<p><strong>Due Date: </strong><%= @task.due_date %></p>
 
 <p>Regards,</p>
 <p>The LOL Company</p>

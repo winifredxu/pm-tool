@@ -3,7 +3,7 @@
 @import 'bootstrap-datetimepicker';
 
 
-a {
+li a {
 	color: white;
 	font-weight: bold;
 }
@@ -48,8 +48,8 @@ header {
 
 .search {
 	position: absolute;
-	right: 140px;
-	margin-top: -45px;
+	right: 200px;
+	margin-top: -55px;
 
 }
 .nav-user {
@@ -80,6 +80,9 @@ textarea {
 
 .category-headers {
 	color: #FF3399;
+}
+.project-details {
+	line-height: 2;
 }
 
 table {
@@ -121,18 +124,26 @@ td {
 
 .server {
 	 color: black;
+	 padding-left: 10px;
 }
 .design {
 	color: pink;
+	padding-left: 10px;
 }
 .misc {
 	 color: gray;
+	 padding-left: 10px;
 }
 .client {
 	 color: blue;
+	 padding-left: 10px;
 }
 .backend {
 	 color: brown;
+	 padding-left: 10px;
+}
+.pink {
+	color: #FF3399;
 }
 
 label.collection_check_boxes {
@@ -142,3 +153,8 @@ label.collection_check_boxes {
 label {
 	padding-right: 10px;
 }
+.project-form {
+	max-width: 450px;
+	padding-left: 40px;
+}
+

@@ -25,15 +25,15 @@
     </tr>
     <tr>
       <td colspan="4">
-        <% if !discussion.comments.empty? %>
-        <button class="btn btn-xs" id="comments_button">Toggle Comments (<%= discussion.comments_count %>)</button></td>
+        <% if discussion.comments.count > 2 %>
+        <button class="btn btn-xs" id="comments_button">Toggle Comments</button></td>
+        <% end %>
       <% discussion.comments.each do |comment| %>
       <tr class="comments_container" id="<%= dom_id(comment) %>">
         <td colspan="3" class="comment-text"><em>"<%= comment.body %>"</em></td>
         <td align="right"><%= link_to "Edit", edit_discussion_comment_path(discussion, comment), class: "btn btn-xs btn-default", remote: true %>&nbsp;<%= link_to "Delete", discussion_comment_path(discussion, comment.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-xs btn-danger", remote: true %></td>
         <% end %>
       </tr>
-      <% end %>
     </tr>
     <% end %>
   </tbody>
