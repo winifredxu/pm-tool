@@ -30,6 +30,25 @@
 <% end %>
 <% end %>
 
+<% if @taggings.present? %>
+    <% @taggings.each do |tag|%>
+      <% if tag == "Misc" %>
+      <span class="glyphicon glyphicon-tag misc"></span> <%= tag %>
+       <% end %>
+      <% if tag == "Client" %>
+      <span class="glyphicon glyphicon-tag client"></span> <%= tag %>
+       <% end %>
+      <% if tag == "Design" %>
+      <span class="glyphicon glyphicon-tag design"></span> <%= tag %>
+       <% end %>
+      <% if tag == "Backend" %>
+      <span class="glyphicon glyphicon-tag backend"></span> <%= tag %>
+      <% end %>
+      <% if tag == "Server" %>
+      <span class="glyphicon glyphicon-tag server"></span> <%= tag %>
+       <% end %>
+<% end %>
+<% end %>
 
 
 

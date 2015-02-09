@@ -41,7 +41,7 @@ class ProjectsController < ApplicationController
   end
 
   def update
-   # redirect_to root_path, alert: "access denied" unless can? :edit, @project
+    # redirect_to root_path, alert: "access denied" unless can? :edit, @project
     if @project.update project_params
       redirect_to projects_path
       flash[:success] = "Request was successfully edited."
@@ -50,25 +50,26 @@ class ProjectsController < ApplicationController
     end
   end
 
-  def show 
+  def show
     @task = Task.new
     @discussion = Discussion.new
     @comment = Comment.new
     @members = find_member_names
+    @taggings = find_tags
   end
 
 
   def search
-   @projects = Project.search params[:search]
+    @projects = Project.search params[:search]
   end
 
-  
+
 
   private
 
   def project_params
     params.require(:project).permit(:title,
-                                    :description, :due_date, :search, {project_member_ids: []})
+                                    :description, :due_date, :search, {project_member_ids: []}, {tag_ids: []})
   end
 
   def find_project
@@ -77,12 +78,16 @@ class ProjectsController < ApplicationController
 
   def restrict_access
     unless can? :manage, @project
-      redirect_to root_path, alert: "access denied" 
+      redirect_to root_path, alert: "access denied"
     end
   end
 
   def find_member_names
     @project.members.map { |member| user = User.find member.user_id; user.first_name + ' ' + user.last_name }
+  end
+
+  def find_tags
+    @project.taggings.map { |t| tag = Tag.find t.tag_id; tag.title }
   end
 
 
