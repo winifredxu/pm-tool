@@ -1,8 +1,11 @@
 <div class="project-area"><span class="label label-default">Project Name</span><h1><%= @project.title %></h1></div>
 <div class="project-details">
 	<strong>Description:</strong> <%= @project.description %><br>
-	<strong>Due Date:</strong> <%= standard_date(@project.due_date) %>
-	<strong>Members:</strong>
+	<strong>Due Date:</strong> <%= standard_date(@project.due_date) %><br>
+	<strong>Members:</strong> <% @members.each do |member| %><%= member%> | <% end %>
+</ul>
+
+  </strong>
 </div>
 
 
@@ -12,12 +15,16 @@
   <% end %>
 </ul>
 
+<% if user_signed_in? && !current_user.has_favorited?(@project) %>
+<%= link_to "Favorite", project_favorites_path(@project, @favorite), class: "btn btn-xs btn-default", method: :post %>
+<% end %>
 
-  <ul>
-  <% @members.each do |member| %>
-  <li><%= member %></li>
-  <% end %>
-</ul>
+<% if user_signed_in? && current_user.has_favorited?(@project) %>
+<% @favorite = current_user.favorites.find_by_project_id(@project) %>
+<%= link_to "Unfavorite", project_favorite_path(@project, @favorite), class: "btn btn-xs btn-default", method: :delete %>
+<% end %>
+
+
 
 
 

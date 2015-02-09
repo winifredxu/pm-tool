@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :projects do
     resources :tasks, only: [:create, :destroy, :update, :edit]
     resources :members, only: [:create, :destroy]
+    resources :favorites, only: [:create, :destroy]
   end
 
   resources :projects, only: [] do
@@ -16,6 +17,9 @@ Rails.application.routes.draw do
   end
   
   root to: "projects#index"
+
+  # resources :favorites, only: [:show]
+  get 'favorites/show', :to => 'favorites#show'
 
 
 

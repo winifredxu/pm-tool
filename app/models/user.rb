@@ -13,7 +13,9 @@ class User < ActiveRecord::Base
   has_many :members, dependent: :destroy
   has_many :member_projects, through: :members, source: :project
 
-  
+  has_many :favorites, dependent: :destroy
+  has_many :favorited_projects, through: :favorites, source: :project
+
 
 
   def full_name
@@ -22,6 +24,10 @@ class User < ActiveRecord::Base
     else
       email
     end
+  end
+
+  def has_favorited?(project)
+    favorited_projects.include? project
   end
 
 end

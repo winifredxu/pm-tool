@@ -5,6 +5,11 @@ class Project < ActiveRecord::Base
   has_many :members, dependent: :destroy
   has_many :project_members, through: :members, source: :user
 
+  has_many :favorites, dependent: :destroy
+  has_many :favorited_users, through: :favorites, source: :user
+
+  
+
 
 
   #has_many :users, through: :members
