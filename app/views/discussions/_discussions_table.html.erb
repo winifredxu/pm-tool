@@ -14,10 +14,10 @@
       </td>
     </tr>
     <tr>
-      <td colspan="4"><%= form_for [discussion, @comment || Comment.new ] do |f| %>
+      <td colspan="4"><%= form_for [discussion, @comment || Comment.new ], remote: true do |f| %>
         <div>
           <%= f.text_area :body, class: "form-control", placeholder: "Comment", rows: 2 %>
-        <br><%= f.submit class: "form-comment btn btn-sm btn-default", remote: true %></td>
+        <br><%= f.submit class: "form-comment btn btn-sm btn-default" %></td>
       </div>
       <% end %>
     </tr>

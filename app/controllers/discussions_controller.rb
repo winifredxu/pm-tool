@@ -4,6 +4,7 @@ class DiscussionsController < ApplicationController
 
   def create
     @discussion = @project.discussions.new discussion_params
+    @discussion.user = current_user
     respond_to do |format|
       if @discussion.save
         format.html { redirect to @project }
