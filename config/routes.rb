@@ -21,6 +21,8 @@ Rails.application.routes.draw do
   # resources :favorites, only: [:show]
   get 'favorites/show', :to => 'favorites#show'
 
+  match "/delayed_job" => DelayedJobWeb, :anchor => false, via: [:get, :post]
+
 
 
 

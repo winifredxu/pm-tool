@@ -7,6 +7,7 @@ class CommentsController < ApplicationController
     @comment = @discussion.comments.new comment_params
    respond_to do |format|
     if @comment.save
+      TasksMailer.notify_project_members(@task).deliver_later
       flash[:success] = "Comment added successfully"
         format.html { redirect_to @project }
         format.js { render }

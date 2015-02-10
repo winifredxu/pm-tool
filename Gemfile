@@ -15,6 +15,8 @@ gem 'bootstrap3-datetimepicker-rails', '~> 4.0.0'
 gem 'friendly_id', '~> 5.1.0'
 gem 'cancancan'
 gem 'bootstrap-sass'
+gem 'delayed_job_active_record'
+gem 'delayed_job_web'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'

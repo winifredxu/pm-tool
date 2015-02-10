@@ -5,11 +5,10 @@ class TasksController < ApplicationController
 
   def create
     @task = @project.tasks.new task_params
-    @user = @project.user
+    @task.user = current_user
     respond_to do |format|
       if @task.save
         flash[:success] = "Task was successfully created"
-        #TasksMailer.notify_project_members(@task).deliver_now
         format.html { redirect_to @project }
         format.js   { render }
       else
@@ -40,18 +39,22 @@ class TasksController < ApplicationController
   def update
     @task = Task.find params[:id]
     @project = Project.friendly.find @task.project_id
+
     if @task.update task_params
-      flash[:success] = "Task was successfully edited."
-      respond_to do |format|
-        format.html { redirect_to project_path(@task.project_id) }
-        format.js   { render }
+      if task_done
+          TasksMailer.notify_task_owner(@task).deliver_later
       end
+        flash[:success] = "Task was successfully edited."
+        respond_to do |format|
+          format.html { redirect_to project_path(@task.project_id) }
+          format.js   { render }
+        end
     else
       flash[:alert] = "Discussion title cannot be blank"
       render :edit
-
     end
   end
+
 
 
   private
@@ -63,4 +66,9 @@ class TasksController < ApplicationController
   def task_params
     params.require(:task).permit(:title, :due_date, :status)
   end
+
+  def task_done
+    @task.status? && @task.user != current_user
+  end
+
 end
