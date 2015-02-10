@@ -49,9 +49,9 @@ class ProjectsController < ApplicationController
   def update
     # redirect_to root_path, alert: "access denied" unless can? :edit, @project
     if @project.update project_params
-       flash[:success] = "Project was successfully edited."
+      flash[:success] = "Project was successfully edited."
       redirect_to projects_path
-     
+
     else
       render :edit
     end

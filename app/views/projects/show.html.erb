@@ -25,7 +25,7 @@
   <% end %>
 
   <% if @members.present? %>
-    <strong>Members:</strong> <% @members.each do |member| %><%= member %> <% end %><br>
+  <strong>Members:</strong> <% @members.each do |member| %><span class="member"><%= member %></span> <% end %><br>
   <% end %>
 
   <% if @project.favorited_users.present? %>

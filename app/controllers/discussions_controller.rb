@@ -6,7 +6,6 @@ class DiscussionsController < ApplicationController
     @discussion = @project.discussions.new discussion_params
     respond_to do |format|
       if @discussion.save
-        flash[:success] = "Discussion was successfully created."
         format.html { redirect to @project }
         format.js { render }
       else

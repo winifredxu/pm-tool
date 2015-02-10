@@ -29,7 +29,7 @@ a:active {
 }
 header {
 	display: block;
-	height: 50px;
+	height: 60px;
 	background: black;
 	margin-bottom: 20px;
 }
@@ -37,8 +37,9 @@ header {
 	color: #555;
 
 	ul {
+
 		padding-left: 120px;
-		padding-top: 12px;
+		padding-top: 5px;
 		padding-right: 35px;
 	}
 	li {
@@ -56,7 +57,7 @@ header {
 
 }
 .nav-user {
-	transform: translateY(-20px);
+	transform: translateY(13px);
 }
 
 .search_btn {
@@ -196,5 +197,12 @@ label {
 }
 .errors, .error-window {
 	color: red;
+}
+.member {
+	font-size: 10px;
+	background-color: #EEEEEE;
+	border: 1px solid #DDDDDD;
+	padding: 3px;
+	margin: 2px;
 }
 

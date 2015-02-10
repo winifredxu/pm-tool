@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
  <head>
-   <title>CodeCore Quiz #1</title>
+   <title>Campbase - Beta</title>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
@@ -14,11 +14,12 @@
  <body>
   <header class="menu">
    <ul>
+    <li><%= image_tag "campbase.gif", width:115, height:48 %></li>
     <li><a href="/projects/new">New Project</a></li>
     |
     <li><a href="/projects/">Show Projects</a></li>
     
-    <li class="pull-right">
+    <li class="pull-right nav-user">
          <% if user_signed_in? %>
          Hello, <%= current_user.first_name %>!&nbsp; <%= link_to "Logout", destroy_user_session_path, method: :delete %> | <span class="glyphicon glyphicon-heart pink"></span> <a href="/favorites/show">My Favorites</a>
          <% else %>

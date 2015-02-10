@@ -1,13 +1,11 @@
+alert('JS success');
+
 <% if @comment.errors.any? %>
   $(".error-window").html("<em>Body cannot be blank!</em>");
 
 <% else %>
 
   $("#discussions").html("<%= j render partial: "/discussions/discussions_table", locals: { project: @project, discussions: @project.discussions.where(status: false)} %>");
-
-  setTimeout(function() {
-   $("<%= dom_id(@discussion)%>").css("background-color", "aqua").effect("highlight", {}, 3000);
-    }, 2000);
 
   <% @discussion = Discussion.new %> 
   

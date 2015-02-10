@@ -13,7 +13,7 @@
     <td><%= standard_date(task.due_date) %></td>
     <td>
       <% if task.status? %>
-      <%= link_to "Undo", project_task_path(@project, task, task: { status: false }), method: :patch, class: "btn btn-sm btn-success", remote: true %>
+      <%= link_to "Undo", project_task_path(@project, task, task: { status: false }), method: :patch, class: "btn btn-sm btn-success" %>
       <% else %>
       <%= link_to "To Do", project_task_path(@project, task, task: { status: true }), method: :patch, class: "btn btn-sm btn-warning", remote: true %>
       <% end %>
