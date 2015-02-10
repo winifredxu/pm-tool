@@ -2,6 +2,9 @@
 @import 'bootstrap';
 @import 'bootstrap-datetimepicker';
 
+* {
+	font-family: 'Open Sans', sans-serif;
+}
 
 li a {
 	color: white;
@@ -58,7 +61,7 @@ header {
 
 .search_btn {
 	position: absolute;
-	left: 170px;
+	left: 180px;
 	margin-bottom: 30px;
 }
 
@@ -96,7 +99,6 @@ td {
 
 .table-bg {
 		border-radius: 8px;
-    box-shadow: 0 0 5px #EEEEEE;
     padding:0 15px 0 15px;
     border: 1px solid #F3F3F3;
 }
@@ -152,9 +154,47 @@ label.collection_check_boxes {
 
 label {
 	padding-right: 10px;
+	padding-left: 10px;
+	font-weight: normal;
+
+}
+.form-control {
+	margin-right: 10px;
+}
+.task-submit {
+	margin-left: 10px;
 }
 .project-form {
-	max-width: 450px;
-	padding-left: 40px;
+	max-width: 600px;
+}
+.table > thead > tr > th {
+	border: none;
+}
+.glyphicon-heart {
+	color: #FF3399;
+	font-size: 16px;
+}
+.glyphicon-edit:hover, .glyphicon-remove:hover {
+	color: #000000;
+	font-size: 16px;
+}
+.glyphicon-edit {
+	color: #2E2E2E;
+}
+.glyphicon-remove {
+	color: red;
+}
+.unfav {
+	color: #333333;
+	font-size: 16px;
+}
+#discussions {
+	padding-left: 15px;
+}
+.tags {
+	padding-top: 15px;
+}
+.errors, .error-window {
+	color: red;
 }
 

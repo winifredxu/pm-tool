@@ -1,4 +1,5 @@
 class RemoveDueDateFromDiscussions < ActiveRecord::Migration
   def change
-  end
+    remove_column :discussions, :due_date
+end
 end

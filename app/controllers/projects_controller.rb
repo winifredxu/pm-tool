@@ -23,8 +23,8 @@ class ProjectsController < ApplicationController
     @project = Project.new project_params
     @project.user = current_user
     if @project.save
-      redirect_to projects_path
       flash[:success] = "Project was successfully created."
+      redirect_to projects_path
     else
       render :new
     end
@@ -36,9 +36,11 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to projects_path, notice: "Project deleted"}
-      format.js { render }
-    end    
+      format.js   { render }
+    end
   end
+
+
 
   def edit
     #redirect_to root_path, alert: "access denied" unless can? :edit, @project
@@ -47,8 +49,9 @@ class ProjectsController < ApplicationController
   def update
     # redirect_to root_path, alert: "access denied" unless can? :edit, @project
     if @project.update project_params
+       flash[:success] = "Project was successfully edited."
       redirect_to projects_path
-      flash[:success] = "Request was successfully edited."
+     
     else
       render :edit
     end

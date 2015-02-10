@@ -1,5 +1,5 @@
 <% if @discussion.errors.any? %>
-  $(".discussion-form").html("<%= j render partial: "/discussions/form" %>");
+  $(".error-window").html("<em>Title cannot be blank!</em>");
 
 <% else %>
 

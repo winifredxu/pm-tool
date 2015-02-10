@@ -8,6 +8,8 @@ class TasksController < ApplicationController
     @user = @project.user
     respond_to do |format|
       if @task.save
+        flash[:success] = "Request was successfully created"
+        #TasksMailer.notify_project_members(@task).deliver_now
         format.html { redirect_to @project, notice: "Task created successfully!"}
         format.js   { render }
       else
@@ -41,8 +43,9 @@ class TasksController < ApplicationController
     @task = Task.find params[:id]
     @project = Project.friendly.find @task.project_id
     if @task.update task_params
+       flash[:success] = "Task was successfully edited."
       respond_to do |format|
-        format.html { redirect_to project_path(@task.project_id), notice: "Task updated" }
+        format.html { redirect_to project_path(@task.project_id) }
         format.js   { render }
       end
     else

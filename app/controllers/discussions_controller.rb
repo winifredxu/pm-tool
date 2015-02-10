@@ -3,16 +3,17 @@ class DiscussionsController < ApplicationController
   before_action :authenticate_user!
 
   def create
-   @discussion = @project.discussions.new discussion_params
-   respond_to do |format|
-    if @discussion.save
-      format.html { redirect to @project, notice: "Discussion created successfully" }
-      format.js { render }
-    else
-      render.html { redirect_to "projects/show/" }
-      render.js { render }
+    @discussion = @project.discussions.new discussion_params
+    respond_to do |format|
+      if @discussion.save
+        flash[:success] = "Discussion was successfully created."
+        format.html { redirect to @project }
+        format.js { render }
+      else
+        render.html { redirect_to "projects/show/" }
+        render.js { render }
+      end
     end
-  end
   end
 
   def edit
@@ -23,8 +24,9 @@ class DiscussionsController < ApplicationController
     @discussion = Discussion.find params[:id]
     @project = Project.friendly.find @discussion.project_id
     if @discussion.update discussion_params
-      redirect_to project_path(@discussion.project_id)
       flash[:success] = "Discussion was successfully edited."
+      redirect_to project_path(@discussion.project_id)
+
     else
       render :edit
     end

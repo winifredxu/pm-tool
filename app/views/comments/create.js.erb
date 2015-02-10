@@ -1,5 +1,5 @@
-<% if @discussion.errors.any? %>
-  $(".discussion-form").html("<%= j render partial: "/discussions/form" %>");
+<% if @comment.errors.any? %>
+  $(".error-window").html("<em>Body cannot be blank!</em>");
 
 <% else %>
 

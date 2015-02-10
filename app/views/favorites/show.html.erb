@@ -1,7 +1,13 @@
 <h1>Favorites</h1>
 <br>
-<ul>
-  <% @favorites.each do |fav| %>
-  <li><%= fav %></li>
-  <% end %>
-</ul>
+<% if @favorites.present? %>
+  <ul>
+    <% @favorites.each do |fav| %>
+      <li><%= fav %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<% if !@favorites.present? %>
+  <em>No love? Get <a href="/projects/index">some!<a></em>
+<% end %>

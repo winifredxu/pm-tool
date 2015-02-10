@@ -42,6 +42,7 @@ group :development do
 	gem "awesome_print"
 	gem "faker"
   gem "letter_opener"
+  gem "pry"
 end
 
 group :development, :test do

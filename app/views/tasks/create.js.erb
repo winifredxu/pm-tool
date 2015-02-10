@@ -1,5 +1,5 @@
 <% if @task.errors.any? %>
-  $(".task-form").html("<%= j render partial: "/tasks/form" %>");
+  $(".error-window").html("<em>Title cannot be blank!</em>");
 
 <% else %>
 

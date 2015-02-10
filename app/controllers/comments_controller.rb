@@ -6,9 +6,11 @@ class CommentsController < ApplicationController
     @project = Project.friendly.find @discussion.project_id
     @comment = @discussion.comments.new comment_params
     if @comment.save
-      redirect_to @project, notice: "Comment created successfully"
+      flash[:success] = "Comment added successfully"
+      redirect_to @project
     else
-      render "projects/show/"
+      flash[:alert] = "Comment body cannot be empty"
+      redirect_to @project
     end
   end
 
@@ -30,8 +32,9 @@ class CommentsController < ApplicationController
     @comment = Comment.find params[:id]
     @discussion = Discussion.find @comment.discussion_id
     if @comment.update comment_params
+      flash[:success] = "Comment was successfully edited."
       respond_to do |format|
-        format.html { redirect_to project_path(@discussion.project_id), notice: "Comment updated"}
+        format.html { redirect_to project_path(@discussion.project_id) }
         format.json { respond_with_bip(@comment) }
       end
     else

@@ -1,19 +1,18 @@
-<h4>Discussions</h4>
-<table class="table borderless">
-  <thead>
-    <tr>
-      <td>Title</td>
-      <td>Description</td>
-      <td colspan="2">Due Date</td>
-    </tr>
-  </thead>
-  <% @project.discussions.each do |discussion| %>
+<h3>Discussions</h3>
+<% @project.discussions.each do |discussion| %>
+ <table class="table borderless"> 
   <tbody class=" table-bg" id="<%= dom_id(discussion)%>">
     <tr>
-      <td><%= discussion.title %></td>
-      <td><%= discussion.description %></td>
-      <td><%= standard_date(discussion.due_date) %></td>
-      <td class="pull-right"><%= link_to "Edit", edit_project_discussion_path(@project, discussion), class: "btn btn-default" %>&nbsp;<%= link_to "Delete", project_discussion_path(@project, discussion), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger", remote: true %></td>
+    <td><strong>Title: </strong><br><%= discussion.title %></td>
+    <td><strong>Description: </strong><br><%= discussion.description %></td>
+      <td colspan="2" align="right"><%= link_to edit_project_discussion_path(@project, discussion) do %>
+          <span class="glyphicon glyphicon-edit"></span>
+
+        <% end %>
+      &nbsp;<%= link_to project_discussion_path(@project, discussion), method: :delete, data: { confirm: 'Are you sure?' }, remote: true do %>
+        <span class="glyphicon glyphicon-remove"></span>
+      <% end %>
+      </td>
     </tr>
     <tr>
       <td colspan="4"><%= form_for [discussion, @comment || Comment.new ] do |f| %>
@@ -29,12 +28,19 @@
         <button class="btn btn-xs" id="comments_button">Toggle Comments</button></td>
         <% end %>
       <% discussion.comments.each do |comment| %>
+    </tr>
       <tr class="comments_container" id="<%= dom_id(comment) %>">
         <td colspan="3" class="comment-text"><em>"<%= comment.body %>"</em></td>
-        <td align="right"><%= link_to "Edit", edit_discussion_comment_path(discussion, comment), class: "btn btn-xs btn-default", remote: true %>&nbsp;<%= link_to "Delete", discussion_comment_path(discussion, comment.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-xs btn-danger", remote: true %></td>
+        <td align="right"><%= link_to edit_discussion_comment_path(discussion, comment), remote: true do %>
+          <span class="glyphicon glyphicon-edit"></span>
+          <% end %>
+        &nbsp;<%= link_to discussion_comment_path(discussion, comment.id), method: :delete, data: { confirm: 'Are you sure?' }, remote: true do %>
+          <span class="glyphicon glyphicon-remove"></span>
+          <% end %>
+        </td>
         <% end %>
       </tr>
-    </tr>
-    <% end %>
-  </tbody>
+      </tbody>
 </table>
+    <% end %>
+

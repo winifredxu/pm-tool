@@ -1,4 +1,4 @@
-<table class="table table-striped table-bg">
+<table class="table table-striped">
   <thead>
     <tr>
       <td>Title</td>
@@ -13,13 +13,20 @@
     <td><%= standard_date(task.due_date) %></td>
     <td>
       <% if task.status? %>
-      <%= link_to "Done :D", project_task_path(@project, task, task: { status: false }), method: :patch, class: "btn btn-sm btn-success", remote: true %>
+      <%= link_to "Undo", project_task_path(@project, task, task: { status: false }), method: :patch, class: "btn btn-sm btn-success", remote: true %>
       <% else %>
       <%= link_to "To Do", project_task_path(@project, task, task: { status: true }), method: :patch, class: "btn btn-sm btn-warning", remote: true %>
       <% end %>
     </td>
-    <td align="right"><%= link_to "Edit", edit_project_task_path(@project, task), class: "btn btn-default" %>&nbsp;<%= link_to "Delete", project_task_path(@project, task), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger", remote: true %></td>
+    <td align="right"><%= link_to edit_project_task_path(@project, task) do %>
+      <span class="glyphicon glyphicon-edit"></span>
+      <% end %>
+    &nbsp;<%= link_to project_task_path(@project, task), method: :delete, data: { confirm: 'Are you sure?' }, remote: true do %>
+       <span class="glyphicon glyphicon-remove"></span>
+       <% end %>
+    </td>
   </tr>
+
   <% end %>
   </tbody>
 </table>

@@ -1,5 +1,5 @@
 <div class="container" max-width="90%">
-	<h1>Welcome to your projects!</h1>
+	<h1 class="pink">Welcome to your projects!</h1>
 	<br>
 <% if !@projects.present? %>
 <em>You don't have any projects.. feel like <a href="/projects/new">adding one?</a></em>
@@ -23,14 +23,18 @@
 		</thead>
 	</tr>
 	<% @projects.each do |project| %>
-	<tr id="#<%= dom_id(project) %>">
+	<tr>
 		<td><%= link_to "Details", project_path(project), class: "btn btn-default" %></td>
-		<td><%= project.title %></td>
+		<td><strong><%= project.title %></strong></td>
 		<td><%= project.description %></td>
 		<td><%= project.due_date %></td>
-		
 		<td>
-			<%= link_to "Edit", edit_project_path(project), class: "btn btn-default", remote: true %><%= link_to "Delete", project_path(project), method: :delete, data: { confirm: 'Are you sure?' }, remote: true, class: "btn btn-danger" %>
+			<td align="right"><%= link_to edit_project_path(project) do %>
+				<span class="glyphicon glyphicon-edit"></span>
+			<% end %>
+			&nbsp;<%= link_to project_path(project), method: :delete, data: { confirm: 'Are you sure?' } do %>
+				<span class="glyphicon glyphicon-remove"></span>
+			<% end %>
 			<% end %></td>
 		</tr>
 	</table>
