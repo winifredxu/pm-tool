@@ -15,8 +15,6 @@ class TasksController < ApplicationController
       else
         format.html { render "projects/show"}
         format.js { render }
-        #redirect_to @project
-        #render "projects/show.html.erb"
       end
     end
   end
@@ -29,7 +27,7 @@ class TasksController < ApplicationController
     flash[:success] = "Task was successfully deleted."
 
     respond_to do |format|
-      format.html { redirect_to @project, notice: "Task deleted" }
+      format.html { redirect_to @project }
       format.js   { render }
     end
   end

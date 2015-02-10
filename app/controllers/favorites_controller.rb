@@ -9,12 +9,15 @@ class FavoritesController < ApplicationController
 
     if current_user
       if favorite.save
-        redirect_to project, notice: "Project is now a favorite <3"
+        flash[:success] = "Favorite added!"
+        redirect_to project
       else
-        redirect_to project, alert: "Unable to save favorite"
+        flash[:alert] = "Favorite could not be saved."
+        redirect_to project
       end
     else
-      redirect_to new_user_session_path, alert: "Please sign in to favorite"
+      flash[:alert] = "Please sign in to favorite."
+      redirect_to new_user_session_path, 
     end
   end
 
@@ -22,9 +25,11 @@ class FavoritesController < ApplicationController
     project     = Project.friendly.find params[:project_id]
     favorite    = project.favorites.find params[:id]
     if favorite.destroy
-      redirect_to project, notice: "UnLiked!"
+      flash[:success] = "Favorite removed!"
+      redirect_to project
     else
-      redirect_to project, alert: "Can't UnLike!"
+      flash[:alert] = "Favorite could not be removed."
+      redirect_to project
     end
   end
 

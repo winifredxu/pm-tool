@@ -14,7 +14,8 @@
   <button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-heart"></span>&nbsp;Remove Favorite </button>
   <% end %>
 <% end %>
-<% end %></h1>
+<% end %>
+</h1>
 </div>
 
 <div class="project-details">
@@ -33,7 +34,9 @@
   <% end %>
 <br>
 <div class="tags">
+  
   <% if @taggings.present? %>
+    
     <strong>Tags:</strong> 
    
     <% @taggings.each do |tag|%>
@@ -59,31 +62,35 @@
       <% end %>
     <% end %>
   <% end %>
-
 </div>
 
 <hr>
 
-<div class="error-window">
-
-</div>
+<div class="error-window"></div>
 
 <div class="col-sm-12">
 	<h3 class="category-headers">New Task</h3>
 	<%# form_for @task, url: project_tasks_path(@project) do |f| %>
+
 		<%= render partial: "/tasks/form", locals: {tasks: @project.tasks, project: @project } %>
+
 	<br>
+
   <% if @project.tasks.present? %>
 	<div class="col-sm-6">
 		<h3>Pending Tasks</h3>
 			<div id="tasks">
+
 				<%= render partial: "/tasks/tasks_table", locals: {tasks: @project.tasks.where(status: false)} %>
+
 			</div>
 	</div>
 	<div class="col-sm-6">
 		<h3>Completed Tasks</h3>
 			<div id="tasks-done">
+
 			<%= render partial: "/tasks/tasks_table", locals: {tasks: @project.tasks.where(status: true)} %>
+
 			</div>
 	</div>
   <% end %>
@@ -91,10 +98,13 @@
 	<div id="discussion-form" class="col-sm-12">
 
 			<%= render partial: "/discussions/form", locals: {project: @project, discussion: @discussion} %> 
+
 	</div>
 </div>
 <div>
 	<div id="discussions">
+
 		<%= render partial: "/discussions/discussions_table", locals: {discussions: @project.discussions} %>
+
 	</div>
 </div>
