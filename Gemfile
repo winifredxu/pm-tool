@@ -8,7 +8,16 @@ gem 'pg'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 
+gem 'carrierwave'
+gem 'simple_form'
+gem 'momentjs-rails', '>= 2.9.0'
+gem 'bootstrap3-datetimepicker-rails', '~> 4.0.0'
+gem 'friendly_id', '~> 5.1.0'
+gem 'cancancan'
 gem 'bootstrap-sass'
+gem 'delayed_job_active_record'
+gem 'delayed_job_web'
+
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
@@ -25,15 +34,8 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
-
-# Use Unicorn as the app server
-# gem 'unicorn'
-
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
-
+gem 'devise'
+gem 'animate-rails'
 
 group :development do
 	gem "colorize"
@@ -41,6 +43,8 @@ group :development do
 	gem "hirb"
 	gem "awesome_print"
 	gem "faker"
+  gem "letter_opener"
+  gem "pry"
 end
 
 group :development, :test do

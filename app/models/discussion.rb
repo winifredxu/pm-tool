@@ -1,12 +1,15 @@
 class Discussion < ActiveRecord::Base
-  belongs_to :task
+  belongs_to :project
+  belongs_to :user
   has_many :comments, dependent: :destroy
 
- 	validates :title, presence: true 
- 	validates :description, presence: true
+  validates :title, presence: true
+  validates :description, presence: true
 
- 	  def project
-    task.question
+  default_scope { order("updated_at DESC") }
+
+  def comments_count
+  	comments.count 
   end
 
 end

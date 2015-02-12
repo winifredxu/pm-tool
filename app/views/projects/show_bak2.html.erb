@@ -6,20 +6,19 @@
 <%# form_for @answer, url: question_answers_path(@question) do |f| %>
 
 <%= form_for [@project, @task] do |f| %>
-<div class="form-group">
-	<%= f.label :title %>
-	<%= f.text_area :title %>
+	<div class="form-group">
+		<%= f.label :title %>
+		<%= f.text_area :title %>
 		<%= f.label :due_date %>
-	<%= f.text_area :due_date %>
-</div>
-
-<%= f.submit class: "btn btn-primary" %>
+		<%= f.text_area :due_date %>
+	</div>
+		<%= f.submit class: "btn btn-primary" %>
 <% end %>
 
 <h2>Tasks</h2>
 
 <% @tasks.each do |task| %>
-<%= task.title %>
-<%= task.due_date %>
-<hr>
+	<%= task.title %>
+	<%= task.due_date %>
+	<hr>
 <% end %>

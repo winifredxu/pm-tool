@@ -1,63 +1,110 @@
-<div class="panel panel-primary">
-<div class="panel-heading">
-<div class="panel-title"><h1><%= @project.title %></h1></div>
+<div class="project-area">
+  <h1><%= @project.title %>
+
+<% if @project.user != current_user %>
+<% if user_signed_in? && !current_user.has_favorited?(@project) %>
+  <%= link_to project_favorites_path(@project, @favorite), method: :post do %>
+  <button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-heart"></span>&nbsp;Favorite </button>
+  <% end %>
+<% end %>
+
+<% if user_signed_in? && current_user.has_favorited?(@project) %>
+<% @favorite = current_user.favorites.find_by_project_id(@project) %>
+  <%= link_to project_favorite_path(@project, @favorite), method: :delete do %>
+  <button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-heart"></span>&nbsp;Remove Favorite </button>
+  <% end %>
+<% end %>
+<% end %>
+</h1>
 </div>
-<div class="panel-body">
-<strong>Description:</strong> <%= @project.description %><br>
-<strong>Due Date:</strong> <%= @project.due_date %> 
-</div>
-</div>
-	<% if @task.errors.any? %>
-		<ul>
-			<% @task.errors.full_messages.each do |msg| %>
-				<li><%= msg %></li>
-			<% end %>
-		</ul>
-	<% end %>	
-<div class="well">
-<h3>Create Task</h3>
-<%# form_for @task, url: project_tasks_path(@project) do |f| %>
-<%= form_for [@project, @task] do |f| %>
-  <div class="form-inline">
-    <%= f.text_area :title, class: "form-control", placeholder: "Task Title", rows: 1 %>
-    <%= f.text_area :due_date, class: "form-control", placeholder: "Due Date", rows: 1 %>
-    <%= f.submit class: "btn btn-success" %>
-  </div>
+
+<div class="project-details">
+	<strong>Description:</strong> <%= @project.description %><br>
+	
+  <% if @project.due_date.present? %>
+    <strong>Due Date:</strong> <%= standard_date(@project.due_date) %><br>
+  <% end %>
+
+  <% if @members.present? %>
+  <strong>Members:</strong> <% @members.each do |member| %><span class="member"><%= member %></span> <% end %><br>
+  <% end %>
+
+  <% if @project.favorited_users.present? %>
+   <strong>Favorited by:</strong> <%= @project.favorited_users.map(&:full_name).join(", ").chop %>
+  <% end %>
+<br>
+<div class="tags">
   
-<% end %>
+  <% if @taggings.present? %>
+    
+    <strong>Tags:</strong> 
+   
+    <% @taggings.each do |tag|%>
+      
+      <% if tag == "Misc" %>
+        <span class="glyphicon glyphicon-tag misc"></span> <%= tag %>
+      <% end %>
+      
+      <% if tag == "Client" %>
+        <span class="glyphicon glyphicon-tag client"></span> <%= tag %>
+      <% end %>
+      
+      <% if tag == "Design" %>
+        <span class="glyphicon glyphicon-tag design"></span> <%= tag %>
+      <% end %>
+      
+      <% if tag == "Backend" %>
+        <span class="glyphicon glyphicon-tag backend"></span> <%= tag %>
+      <% end %>
+      
+      <% if tag == "Server" %>
+        <span class="glyphicon glyphicon-tag server"></span> <%= tag %>
+      <% end %>
+    <% end %>
+  <% end %>
 </div>
 
- <h3>Current Tasks</h3>
- <hr>
- <div class="push-right">
-	<% @project.tasks.each do |task| %>
-	  <strong>Title:</strong> <%= task.title %><br>
-	  <strong>Due Date: </strong><%= task.due_date %>
-<br><br>
-	 <%= link_to "Delete", project_task_path(@project, task), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger" %>
-	 <%= link_to "New Discussion", project_task_path(@project, task), class: "btn btn-sm btn-danger" %> 
-	 <hr>
-	 	 </div>
+<hr>
 
-<%= form_for [task, (@discussion || Discussion.new)] do |f| %>
-  <div class="form-inline">
-    <%= f.text_area :title, class: "form-control", placeholder: "Title", rows: 1 %>
-        <%= f.text_area :description, class: "form-control", placeholder: "Description", rows: 1 %>
-    <%= f.text_area :due_date, class: "form-control", placeholder: "Due Date", rows: 1 %>
-    <%= f.submit class: "btn btn-success" %>
-  </div>
+<div class="error-window"></div>
 
-  <h3>Current Discussions</h3>
- <hr>
-	<% task.discussions.each do |discussion| %>
-	  <strong>Title:</strong> <%= discussion.title %><br>
-	  <strong>Description:</strong> <%= discussion.description %><br>
-	  <strong>Due Date: </strong><%= discussion.due_date %>
-		<br><br>
-			 <%= link_to "Delete", task_discussion_path(task, discussion), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger" %>
-	 <hr>
+<div class="col-sm-12">
+	<h3 class="category-headers">New Task</h3>
+	<%# form_for @task, url: project_tasks_path(@project) do |f| %>
 
-<% end %>
-<% end %>
-<% end %>
+		<%= render partial: "/tasks/form", locals: {tasks: @project.tasks, project: @project } %>
 
+	<br>
+
+  <% if @project.tasks.present? %>
+	<div class="col-sm-6">
+		<h3>Pending Tasks</h3>
+			<div id="tasks">
+
+				<%= render partial: "/tasks/tasks_table", locals: {tasks: @project.tasks.where(status: false)} %>
+
+			</div>
+	</div>
+	<div class="col-sm-6">
+		<h3>Completed Tasks</h3>
+			<div id="tasks-done">
+
+			<%= render partial: "/tasks/tasks_table", locals: {tasks: @project.tasks.where(status: true)} %>
+
+			</div>
+	</div>
+  <% end %>
+
+	<div id="discussion-form" class="col-sm-12">
+
+			<%= render partial: "/discussions/form", locals: {project: @project, discussion: @discussion} %> 
+
+	</div>
+</div>
+<div>
+	<div id="discussions">
+
+		<%= render partial: "/discussions/discussions_table", locals: {discussions: @project.discussions} %>
+
+	</div>
+</div>

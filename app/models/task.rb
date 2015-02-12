@@ -1,6 +1,10 @@
 class Task < ActiveRecord::Base
+  
   belongs_to :project
-  has_many :discussions, dependent: :destroy
+  belongs_to :user
+  
+  validates  :title, presence: true
 
+  default_scope { order("due_date ASC") }
 
 end

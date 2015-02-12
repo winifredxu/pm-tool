@@ -1,0 +1,36 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <td>Title</td>
+      <td>Due Date</td>
+      <td colspan="2">Status</td>
+    </tr>
+  </thead>
+  <tbody>
+  <% tasks.each do |task| %> 
+  <tr id="<%= dom_id(task) %>">
+    <td><strong><%= task.title %></strong></td>
+    <td><%= standard_date(task.due_date) %></td>
+    <td>
+      <% if task.status? %>
+      <%= link_to "Undo", project_task_path(@project, task, task: { status: false }), method: :patch, class: "btn btn-sm btn-success" %>
+      <% else %>
+      <%= link_to "To Do", project_task_path(@project, task, task: { status: true }), method: :patch, class: "btn btn-sm btn-warning", remote: true %>
+      <% end %>
+    </td>
+    <td align="right"><%= link_to edit_project_task_path(@project, task) do %>
+      <span class="glyphicon glyphicon-edit"></span>
+      <% end %>
+    &nbsp;<%= link_to project_task_path(@project, task), method: :delete, data: { confirm: 'Are you sure?' }, remote: true do %>
+       <span class="glyphicon glyphicon-remove"></span>
+       <% end %>
+    </td>
+  </tr>
+
+  <% end %>
+  </tbody>
+</table>
+
+
+
+

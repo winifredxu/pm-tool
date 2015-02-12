@@ -1,0 +1,208 @@
+@import 'bootstrap-sprockets';
+@import 'bootstrap';
+@import 'bootstrap-datetimepicker';
+
+* {
+	font-family: 'Open Sans', sans-serif;
+}
+
+li a {
+	color: white;
+	font-weight: bold;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #FF3399;
+}
+
+a:active {
+    text-decoration: underline;
+}
+header {
+	display: block;
+	height: 60px;
+	background: black;
+	margin-bottom: 20px;
+}
+.menu {
+	color: #555;
+
+	ul {
+
+		padding-left: 120px;
+		padding-top: 5px;
+		padding-right: 35px;
+	}
+	li {
+		color: white;
+		padding-left: 10px;
+		padding-right: 10px;
+		display: inline;
+	}
+}
+
+.search {
+	position: absolute;
+	right: 200px;
+	margin-top: -55px;
+
+}
+.nav-user {
+	transform: translateY(13px);
+}
+
+.search_btn {
+	position: absolute;
+	left: 180px;
+	margin-bottom: 30px;
+}
+
+thead {
+	font-weight: bold;
+	color: #666;
+	border: none;
+	padding: 20px;
+}
+
+textarea {
+    resize: none;
+}
+.button-spacing {
+	.btn {
+		padding-left: 10px;
+	}
+}
+
+.category-headers {
+	color: #FF3399;
+}
+.project-details {
+	line-height: 2;
+}
+
+table {
+	max-width: 600px;
+	padding: 20px;
+}
+
+td {
+	padding: 20px;      
+}
+
+.table-bg {
+		border-radius: 8px;
+    padding:0 15px 0 15px;
+    border: 1px solid #F3F3F3;
+}
+
+#comments_button {
+	background: black;
+	color: white;
+}
+
+.col-sm-12 {
+	padding: 0;
+}
+
+.borderless > tbody > tr > td {
+    border: none;
+}
+
+.comment-text {
+	font-size: 13px;
+}
+
+.highlight {
+	background-color: white;
+}
+
+.server {
+	 color: black;
+	 padding-left: 10px;
+}
+.design {
+	color: pink;
+	padding-left: 10px;
+}
+.misc {
+	 color: gray;
+	 padding-left: 10px;
+}
+.client {
+	 color: blue;
+	 padding-left: 10px;
+}
+.backend {
+	 color: brown;
+	 padding-left: 10px;
+}
+.pink {
+	color: #FF3399;
+}
+
+label.collection_check_boxes {
+	padding-left: 0px;
+}
+
+label {
+	padding-right: 10px;
+	padding-left: 10px;
+	font-weight: normal;
+
+}
+.form-control {
+	margin-right: 10px;
+}
+.task-submit {
+	margin-left: 10px;
+}
+.project-form {
+	max-width: 600px;
+}
+.table > thead > tr > th {
+	border: none;
+}
+.glyphicon-heart {
+	color: #FF3399;
+	font-size: 16px;
+}
+.glyphicon-edit:hover, .glyphicon-remove:hover {
+	color: #000000;
+	font-size: 16px;
+}
+.glyphicon-edit {
+	color: #2E2E2E;
+}
+.glyphicon-remove {
+	color: red;
+}
+.unfav {
+	color: #333333;
+	font-size: 16px;
+}
+#discussions {
+	padding-left: 15px;
+}
+.tags {
+	padding-top: 15px;
+}
+.errors, .error-window {
+	color: red;
+}
+.member {
+	font-size: 10px;
+	background-color: #EEEEEE;
+	border: 1px solid #DDDDDD;
+	padding: 3px;
+	margin: 2px;
+}
+

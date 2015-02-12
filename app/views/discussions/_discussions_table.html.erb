@@ -1,0 +1,44 @@
+<h3>Discussions</h3>
+<% @project.discussions.each do |discussion| %>
+<table class="table borderless">
+  <tbody class=" table-bg" id="<%= dom_id(discussion)%>">
+    <tr>
+      <td><strong>Title: </strong><br><%= discussion.title %></td>
+      <td><strong>Description: </strong><br><%= discussion.description %></td>
+      <td colspan="2" align="right"><%= link_to edit_project_discussion_path(@project, discussion) do %>
+        <span class="glyphicon glyphicon-edit"></span>
+        <% end %>
+       &nbsp;<%= link_to project_discussion_path(@project, discussion), method: :delete, data: { confirm: 'Are you sure?' }, remote: true do %>
+        <span class="glyphicon glyphicon-remove"></span>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4"><%= form_for [discussion, @comment || Comment.new ], remote: true do |f| %>
+        <div>
+          <%= f.text_area :body, class: "form-control", placeholder: "Comment", rows: 2 %>
+        <br><%= f.submit class: "form-comment btn btn-sm btn-default" %></td>
+      </div>
+      <% end %>
+    </tr>
+    <tr>
+      <td colspan="4">
+        <% if discussion.comments.count > 2 %>
+      <button class="btn btn-xs" id="comments_button">Toggle Comments</button></td>
+      <% end %>
+      <% discussion.comments.each do |comment| %>
+    </tr>
+    <tr class="comments_container" id="<%= dom_id(comment) %>">
+      <td colspan="3" class="comment-text"><em>"<%= comment.body %>"</em></td>
+      <td align="right"><%= link_to edit_discussion_comment_path(discussion, comment), remote: true do %>
+        <span class="glyphicon glyphicon-edit"></span>
+        <% end %>
+        &nbsp;<%= link_to discussion_comment_path(discussion, comment.id), method: :delete, data: { confirm: 'Are you sure?' }, remote: true do %>
+        <span class="glyphicon glyphicon-remove"></span>
+        <% end %>
+      </td>
+      <% end %>
+    </tr>
+  </tbody>
+</table>
+<% end %>

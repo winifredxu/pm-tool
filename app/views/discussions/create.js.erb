@@ -1,0 +1,15 @@
+<% if @discussion.errors.any? %>
+  $(".error-window").html("<em>Title cannot be blank!</em>");
+
+<% else %>
+
+  $("#discussions").html("<%= j render partial: "/discussions/discussions_table", locals: { project: @project, discussions: @project.discussions.where(status: false)} %>");
+  
+  //$("#<%= dom_id(@discussion)%>").css("background", "#E0FFEB").fadeOut("slow"); 
+
+
+  <% @discussion = Discussion.new %> 
+  
+  $("#discussion-form").html("<%= j render partial: "/discussions/form" %>");
+<% end %>
+

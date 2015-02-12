@@ -1,33 +1,48 @@
+<script type="text/javascript">
+  $(function () {
+  $('#datetimepicker1').datetimepicker({
+                        pickTime: false, format: "DD-mm-YYYY"
+  });
+});
+</script>
 
-<% if @project.errors.any? %>
-  <ul>
-    <% @project.errors.full_messages.each do |msg| %>
-      <li class="alert alert-danger"><%= msg %></li>
-    <% end %>
-  </ul>
-<% end %>
-
-
-
-<%= form_for @project do |f| %>
-	
-	<%= f.label :title %>
-	<br>
-	<%= f.text_field :title, class: "form-control" %>
-	<br>
-	<%= f.label :description %>
-	<br>
-	<%= f.text_field :description, class: "form-control" %>
-	<br>
-	<%= f.label :due_date %>
-	<br>
-	<%= f.text_field :due_date, class: "form-control" %>
-	<br>
-	<%= f.submit class: "btn btn-primary" %>
-	<%= button_tag "Reset", type: :reset %>
-<% end %>
+<div class="errors">
+  <% if @project.errors.any? %>
+      <ul>
+        <% @project.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+  <% end %>
 </div>
 
-
-
-
+<div class="project-form">
+  <div class="form-group">
+    <%= form_for @project do |f| %>
+    <%= f.text_field :title, class: "form-control", placeholder: "Title" %><br>
+    <%= f.text_field :description, class: "form-control", placeholder: "Description", rows: 2 %>
+    <br>
+    <div class="input-group date form-group" id="datetimepicker1">
+      <%= f.text_field :due_date, class: "form-control", placeholder: "Due Date" %>
+      <span class="input-group-addon">
+      <span class="glyphicon glyphicon-calendar"></span>
+      </span>
+    </div>
+    <br>
+    <span class="glyphicon glyphicon-user pink"></span>
+    <%= f.label :project_members %>
+    <br>
+      <%= f.collection_check_boxes :project_member_ids, User.all, :id, :full_name, wrapper: :vertical_radio_and_checkboxes %>
+    <br>
+    <hr>
+    <span class="glyphicon glyphicon-tag pink"></span>
+    <%= f.label :tag %>
+    <br>
+      <%= f.collection_check_boxes :tag_ids, Tag.all, :id, :title, wrapper: :vertical_radio_and_checkboxes %>
+    <br>
+    <hr>
+    <%= f.submit class: "btn btn-default" %>
+    <%= button_tag "Reset", type: :reset %>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+<% if @task.errors.any? %>
+  $(".error-window").html("<em>Title cannot be blank!</em>");
+
+<% else %>
+
+  $("#tasks").html("<%= j   render partial: "/tasks/tasks_table", locals: { project: @project, tasks: @project.tasks.where(status: false)} %>");
+  
+  <% @task = Task.new %> 
+  
+  $(".task-form").html("<%= j render partial: "/tasks/form" %>");
+<% end %>
